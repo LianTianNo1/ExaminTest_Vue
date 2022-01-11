@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      @media screen and (max-width: 449px) {
+        html {
+          font-size: 16px;
+        }
+      }
+      @media screen and (min-width: 450px) {
+        html {
+          font-size: 24px;
+        }
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: #55545b;
+      }
+      /* 整个滚动条 */
+      ::-webkit-scrollbar {
+        width: 6px;
+        background-color: #ffffff;
+        display: none;
+      }
+
+      /* 鼠标指针浮动显示 */
+      :hover::-webkit-scrollbar {
+        display: block;
+      }
+
+      /* 滚动条轨道 */
+      ::-webkit-scrollbar-track {
+        /* 阴影 */
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #ffffff;
+      }
+
+      /* 滚定条滑块 */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 30px;
+        background-color: #1aaaec8f;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
+
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->

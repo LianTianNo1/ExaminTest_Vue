@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 export default {
   components: {},
   data() {
@@ -33,22 +34,37 @@ export default {
         nickName: '',
         userName: '',
         password: '',
-      }
+      },
     };
   },
   mounted() { },
+  computed: {
+    ...mapState(['isLogin', 'baseURL'])
+  },
   methods: {
-    myreg() {
-      const url = 'http://127.0.0.1:3000/demo/examination/reg'
-      this.$axios.post(url, this.userInfo).then(data => console.log(data))
-      console.log(this.userInfo)
+    ...mapMutations(['updataStatus', 'updataUserInfo']),
+    async myreg() {
+      if (!this.userInfo.nickName || !this.userInfo.userName || !this.userInfo.password) return this.$message.error('请填写必要信息！');
+      const url = this.baseURL + '/demo/examination/reg'
+      const res = (await this.$axios.post(url, this.userInfo)).data
+      if (res.code !== 7) return this.$message.error(res.msg);
+      this.$message.success(res.msg);
     },
     async mylogin() {
-      const url = 'http://127.0.0.1:3000/demo/examination/login'
+      if (!this.userInfo.userName || !this.userInfo.password) return this.$message.error('请填写必要信息！');
+      const url = this.baseURL + '/demo/examination/login'
       const res = (await this.$axios.post(url, this.userInfo)).data
-      if (res.code !== 7) return
-      this.router.push('/userCenter')
+      if (res.code !== 7) return this.$message.error(res.msg);
+      this.$message.success(res.msg);
+      sessionStorage.setItem("isLogin", this.userInfo.userName);
+      const userInfo = (await this.$axios.post(this.baseURL + '/demo/examination/getUserInfo', this.userInfo)).data.data[0]
+      console.log('用户信息为', userInfo)
+      this.updataUserInfo(userInfo)
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+      this.updataStatus(JSON.parse(sessionStorage.getItem('isLogin')))
+      this.router.push('/userCenter');
     },
+
     toggleStatus() {
       this.loginShow = !this.loginShow
     }
@@ -74,60 +90,49 @@ export default {
 .wrap form {
   position: relative;
   color: white;
-  padding: 4rem;
+  padding: 1.5rem;
   z-index: 2;
-  background-color: #ffffff30;
-  box-shadow: 3px 5px 20px 2px #00000040;
+  background-color: #1f2845d6;
+  box-shadow: 3px 5px 20px 2px #00000040, 0px 0px 20px 1px #ffffff5c;
 }
-
 form label {
   display: block;
   position: relative;
   letter-spacing: 10px;
+  font-size: 0.8rem;
 }
-/* form label::after {
-  content: '';
-  display: block;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#50c1e9),
-    to(#ff5f5f)
-  );
-  background-image: linear-gradient(to right, #50c1e9, #ff5f5f);
-  position: absolute;
-  top: 120%;
-  width: 100%;
-  height: 5px;
-  -webkit-box-shadow: 1px 1px 1px yellow;
-  box-shadow: 2px 2px 6px 0px yellow;
-} */
+
 form button {
-  margin: 1rem 0;
-  cursor: pointer;
-  width: 100%;
-  font-size: 27px;
-  padding: 1rem 2rem;
-  border: none;
-  letter-spacing: 5px;
-  background-color: #ff585d;
-  color: #ffffff;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 1s;
+    margin: 1rem 0;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    letter-spacing: 5px;
+    border-radius: 8px;
+    background-color: #4e5c77;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1s;
+    font-family: serif;
 }
 form button:hover {
-  background-color: #41b6e6;
+  background-color: #858eaf;
 }
 form input {
   min-width: 20vw;
-  margin: 1rem 0 2rem;
-  height: 2rem;
+  margin: 0.4rem 0 1rem;
+  height: 1.3rem;
   padding-left: 1rem;
-  outline-color: #ff585d;
-  border-radius: 2rem;
+  color: white;
+  background-color: #505e7b;
+  /* outline: none; */
+  outline-color: #4e5c77;
+  border-radius: 0.2rem;
+  border: none;
 }
 </style>

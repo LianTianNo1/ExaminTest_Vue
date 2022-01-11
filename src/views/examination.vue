@@ -173,16 +173,31 @@
         <div @click="nextItem" class="next_item">下一题</div>
         <div @click="preItem" class="next_item">上一题</div>
         <div @click="showResult" class="submit">提交</div>
+        <div @click="emptyReset" class="submit">重新选择文件</div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
 const leftItem = () => import('@/components/left.vue')
 export default {
   name: "examination",
   components: {
     leftItem
+  },
+  computed: {
+    ...mapState(['baseURL', 'userInfo', 'nowTestExamin'])
+  },
+  created() {
+    //  从缓存中获取数据
+    if (JSON.stringify(this.userInfo) === '{}') {
+      this.updataUserInfo(JSON.parse(sessionStorage.getItem('userInfo')))
+      // console.log(this.userInfo)
+    }
+    if (JSON.stringify(this.nowTestExamin) !== '{}') {
+      this.initData(this.nowTestExamin)
+    }
   },
   data() {
     return {
@@ -248,6 +263,11 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updataUserInfo', 'setNowTestExamin']),
+    emptyReset() {
+      this.setNowTestExamin({})
+      this.$emit('reloadComponent')
+    },
     // 触发文件选择
     targetChooseFile() {
       const chooseFile = this.$refs.file
@@ -288,7 +308,65 @@ export default {
       // console.log(file)
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("username", this.userInfo.username);
       this.uploadFile(formData)
+    },
+    initData(data) {
+      this.sign_list_data = data.sign_data
+      if (JSON.stringify(this.sign_list_data) !== '{}' && this.sign_list_data.data.length > 0) {
+        this.sign_list_data.data.shift()
+        this.sign_list_data.data.sort(() => 0.5 - Math.random())
+      }
+
+      this.mult_list_data = data.mult_data
+      if (JSON.stringify(this.mult_list_data) !== '{}' && this.mult_list_data.data.length > 0) {
+        this.mult_list_data.data.shift()
+        this.mult_list_data.data.sort(() => 0.5 - Math.random())
+      }
+      this.judge_list_data = data.judge_data
+      if (JSON.stringify(this.judge_list_data) !== '{}' && this.judge_list_data.data.length > 0) {
+        this.judge_list_data.data.shift()
+        this.judge_list_data.data.sort(() => 0.5 - Math.random())
+      }
+      this.blank_list_data = data.blank_data
+      if (JSON.stringify(this.blank_list_data) !== '{}' && this.blank_list_data.data.length > 0) {
+        this.blank_list_data.data.shift()
+        this.blank_list_data.data.sort(() => 0.5 - Math.random())
+      }
+
+      this.total_data.push({
+        id: 1,
+        title: '单选题',
+        data: this.sign_list_data,
+        answerList: this.sign_answerList,
+        titletype: 'sign'
+      }, {
+        id: 2,
+        title: '多选题',
+        data: this.mult_list_data,
+        answerList: this.mult_answerList,
+        titletype: 'mult'
+      }, {
+        id: 3,
+        title: '判断题',
+        data: this.judge_list_data,
+        answerList: this.judge_answerList,
+        titletype: 'judge'
+      }, {
+        id: 4,
+        title: '填空题',
+        data: this.blank_list_data,
+        answerList: this.blank_answerList,
+        titletype: 'blank'
+      })
+      this.chooseFileShow = false
+      this.errPageShow = false
+      this.containerShow = true
+      this.multFlag = false
+      this.sign_item_index = 0
+      this.mult_item_index = -1
+      this.judge_item_index = -1
+      this.blank_item_index = -1
     },
     // 上传文件并获取数据
     uploadFile(formData) {
@@ -297,54 +375,14 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }
-      // this.$axios.post('http://120.25.249.159:3000/demo/examination/readFile', formData, config).then(res => {
-      this.$axios.post('http://127.0.0.1:3000/demo/examination/readFile', formData, config).then(res => {
-        // this.$axios.post('/demo/examination/readFile', formData, config).then(res => {
+      this.$axios.post(this.baseURL + '/demo/examination/readFile', formData, config).then(res => {
         if (res.data.code === 1 && res.data.error === null) {
           console.log(res)
-
-          this.sign_list_data = res.data.data.sign_data
-          this.sign_list_data.data.shift()
-          this.sign_list_data.data.sort(() => 0.5 - Math.random())
-          this.mult_list_data = res.data.data.mult_data
-          this.mult_list_data.data.shift()
-          this.mult_list_data.data.sort(() => 0.5 - Math.random())
-          this.judge_list_data = res.data.data.judge_data
-          this.judge_list_data.data.shift()
-          this.judge_list_data.data.sort(() => 0.5 - Math.random())
-          this.blank_list_data = res.data.data.blank_data
-          this.blank_list_data.data.shift()
-          this.blank_list_data.data.sort(() => 0.5 - Math.random())
-          this.total_data.push({
-            id: 1,
-            title: '单选题',
-            data: this.sign_list_data,
-            answerList: this.sign_answerList,
-            titletype: 'sign'
-          }, {
-            id: 2,
-            title: '多选题',
-            data: this.mult_list_data,
-            answerList: this.mult_answerList,
-            titletype: 'mult'
-          }, {
-            id: 3,
-            title: '判断题',
-            data: this.judge_list_data,
-            answerList: this.judge_answerList,
-            titletype: 'judge'
-          }, {
-            id: 4,
-            title: '填空题',
-            data: this.blank_list_data,
-            answerList: this.blank_answerList,
-            titletype: 'blank'
-          })
-          this.chooseFileShow = false
-          // this.mytip.createTip(res.data.msg, '#00BCD4', '#E0F7FA')
+          this.initData(res.data.data)
+          this.$message.success(res.data.msg);
         } else {
           console.log(res)
-          // this.mytip.createTip(res.data.msg, '#FFAB91', '#F48FB1')
+          this.$message.error(res.data.msg);
         }
       })
     },
@@ -615,7 +653,7 @@ body {
   display: flex;
   padding: 1rem 2rem;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1rem;
   border-left: 10px solid #50c1e9;
   box-shadow: 1px 1px 7px #a5939333;
   margin-bottom: 2rem;
@@ -631,9 +669,10 @@ body {
   background-color: #2cc0b3;
 }
 .choose_item {
-  padding: 1rem 1rem 1rem 5rem;
+  padding: 0.6rem 0.6rem 0.6rem 4rem;
   box-shadow: 3px 3px 7px 2px #a5939333;
   cursor: pointer;
+  font-size: 0.7rem;
   position: relative;
   margin: 20px 0;
 }
@@ -677,13 +716,14 @@ body {
 }
 .next_item,
 .submit {
-  margin: 2rem 0;
+  margin: 1rem 0;
   background-color: #f16b6f;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  font-size: 0.6rem;
+  padding: 0.6rem 0;
   cursor: pointer;
   box-shadow: 3px 3px 7px 2px #a5939333;
 }

@@ -42,11 +42,13 @@ export default {
 .left {
   height: 88vh;
   width: 23%;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #f5f7fa;
   box-shadow: 1px 1px 7px #00000033;
   overflow-y: auto;
   padding-bottom: 6rem;
+  min-width: 328px;
+  max-width: 329px;
 }
 .left_title {
   height: 2rem;
@@ -67,9 +69,10 @@ export default {
 }
 .serial {
   cursor: pointer;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin: 0.2rem;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
