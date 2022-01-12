@@ -71,68 +71,133 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 .box {
   width: 100%;
   padding: 1rem;
-  height: 88vh;
+  height: 86vh;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(https://gitee.com/lang-tian/image_upload/raw/master/img/$WV7@6Y_J23X8%603V7G4A24M.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #eb3b3b,
+    #934fc3 21%,
+    #86e0ff,
+    #0c9dce
+  );
+  background-size: 400% 400%;
+  animation: bgmove 6s infinite alternate;
+}
+@keyframes bgmove {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 100% 100%;
+  }
+  to {
+    background-position: 0% 100%;
+  }
 }
 .wrap {
   padding: 1rem;
-}
-.wrap form {
-  position: relative;
-  color: white;
-  padding: 1.5rem;
-  z-index: 2;
-  background-color: #1f2845d6;
-  box-shadow: 3px 5px 20px 2px #00000040, 0px 0px 20px 1px #ffffff5c;
-}
-form label {
-  display: block;
-  position: relative;
-  letter-spacing: 10px;
-  font-size: 0.8rem;
-}
-
-form button {
-    margin: 1rem 0;
-    cursor: pointer;
-    width: 100%;
-    font-size: 0.8rem;
-    padding: 0.5rem 2rem;
-    border: none;
-    letter-spacing: 5px;
-    border-radius: 8px;
-    background-color: #4e5c77;
-    color: #ffffff;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 1s;
-    font-family: serif;
-}
-form button:hover {
-  background-color: #858eaf;
-}
-form input {
-  min-width: 20vw;
-  margin: 0.4rem 0 1rem;
-  height: 1.3rem;
-  padding-left: 1rem;
-  color: white;
-  background-color: #505e7b;
-  /* outline: none; */
-  outline-color: #4e5c77;
-  border-radius: 0.2rem;
-  border: none;
+  form {
+    position: relative;
+    color: white;
+    padding: 1.5rem;
+    z-index: 2;
+    /* background-color: #1f2845d6; */
+    /* box-shadow: 3px 5px 20px 2px #00000040, 0px 0px 20px 1px #ffffff5c; */
+    border: 10px solid #cbd9dc;
+    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+    background-image: linear-gradient(
+      150deg,
+      #56677a,
+      #cedcdf 21%,
+      #6e777a,
+      #566162
+    );
+    input {
+      min-width: 20vw;
+      margin: 0.4rem 0 1rem;
+      /* height: 1.3rem; */
+      padding-left: 1rem;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 0.7rem;
+      /* outline: none; */
+      outline-color: #4e5c77;
+      border-radius: 0.2rem;
+      border: none;
+      box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
+      text-shadow: 1px 1px 0px #788082, 2px 2px 0px #565e61, 3px 3px 0px #5d6769,
+        -1px -1px 0px white;
+      color: #cddadd;
+      letter-spacing: 4px;
+      background-color: #99a5a8;
+      @media screen and (max-width: 450px) {
+        text-shadow: 1px 1px 0px #788082;
+      }
+    }
+    label {
+      display: block;
+      position: relative;
+      letter-spacing: 10px;
+      font-size: 0.8rem;
+    }
+    button {
+      margin: 1rem 0;
+      cursor: pointer;
+      width: 100%;
+      font-size: 0.8rem;
+      padding: 0.5rem 2rem;
+      border: none;
+      letter-spacing: 5px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 1s;
+      font-family: serif;
+      background-image: linear-gradient(
+        150deg,
+        #56677a,
+        #cedcdf 1%,
+        #6e777a,
+        #566162
+      );
+      color: white;
+      box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
+        1px 1px 0px 0px #ffffff6b;
+      transition: all 0.5s;
+    }
+    button:hover {
+      background-image: linear-gradient(
+        318deg,
+        #56677a,
+        #cedcdf 1%,
+        #6e777a,
+        #566162
+      );
+      color: white;
+      box-shadow: -1px 1px 7px #00000042, inset 3px 3px 4px 0px #02020285,
+        1px 1px 0px 0px #fffffff5, inset -3px -3px 7px #00000042;
+    }
+  }
 }
 </style>

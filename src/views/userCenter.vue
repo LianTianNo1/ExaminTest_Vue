@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <div class="left">
+    <div :class="['left', { left_item_show: leftItemShow }]">
       <input
         type="file"
         @change="chooseFile($event)"
         ref="image"
         class="choose_file"
       />
-      <div class="infobox">
+      <div class="infobox" v-if="!leftItemShow">
         <div class="title">用户信息</div>
         <div class="head_image">
           <img
@@ -22,13 +22,19 @@
         <div class="info">
           <p class="nickname"><span>昵称：</span>{{ userInfo.nickname }}</p>
           <p class="password"><span>密码：</span>{{ userInfo.password }}</p>
+          <div @click="leftItemShow = !leftItemShow" class="change_show_btn">
+            {{ leftItemShow ? '显示' : '隐藏' }}用户信息
+          </div>
         </div>
       </div>
     </div>
-    <div class="right">
+    <div :class="['right', { right_full: leftItemShow }]">
       <div class="record_box">
         <div class="record_title">我的文件</div>
         <div class="record_item_box">
+          <div @click="leftItemShow = !leftItemShow" class="change_show_btn">
+            {{ leftItemShow ? '显示' : '隐藏' }}用户信息
+          </div>
           <table>
             <thead>
               <tr>
@@ -94,6 +100,7 @@ export default {
   },
   data() {
     return {
+      leftItemShow: false
     };
   },
   mounted() { },
@@ -164,15 +171,26 @@ export default {
   }
 };
 </script>
-<style  scoped>
+<style  scoped lang="scss">
 .container {
   /* background-color: white; */
-  height: 88vh;
+  height: 86vh;
   display: flex;
   justify-content: space-between;
   justify-items: flex-start;
 }
+.left_item_show {
+  width: 0 !important;
+  min-width: 0px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.change_show_btn {
+  cursor: pointer;
+  text-align: center;
+}
 .left {
+  transition: all 1s;
   width: 20vw;
   display: flex;
   justify-content: center;
@@ -181,14 +199,24 @@ export default {
   /* animation: left_an 3s infinite alternate; */
   background-size: 400% 400%;
   background-position: 0 0;
-  background-image: linear-gradient(289deg, #515056 10%, #333238 100%);
   color: white;
+  /* background-image: linear-gradient(289deg, #515056 10%, #333238 100%);
   box-shadow: 6px 8px 7px #00000042, inset 3px -1px 4px 0px #02020285,
-    -1px 1px 3px 1px #ffffff;
+    -1px 1px 3px 1px #ffffff; */
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
 }
 @keyframes left_an {
   to {
-    box-shadow: 3px 0px 20px 1px rgb(0 0 0 / 14%);
+    box-shadow: 3px 0px 20px 1px rgba(0, 0, 0, 14%);
     background-color: #ea5455;
     background-position: 100% 100%;
     background-image: linear-gradient(135deg, #feb692 10%, transparent 100%);
@@ -198,15 +226,29 @@ export default {
   width: 0;
 }
 .right {
-  box-shadow: -3px 0px 20px 1px rgb(0 0 0 / 14%);
+  transition: all 1s;
+  box-shadow: -3px 0px 20px 1px rgba(0, 0, 0, 14%);
   width: 78vw;
-  background-image: url(https://gitee.com/lang-tian/image_upload/raw/master/img/$WV7@6Y_J23X8%603V7G4A24M.jpg);
+  // background-image: url(https://gitee.com/lang-tian/image_upload/raw/master/img/$WV7@6Y_J23X8%603V7G4A24M.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding-top: 2rem;
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
+}
+.right_full {
+  width: 100% !important;
 }
 .infobox {
   position: relative;
@@ -217,7 +259,7 @@ export default {
   position: absolute;
   /* top: -160px; */
   letter-spacing: 10px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: cursive;
   left: 50%;
@@ -237,7 +279,16 @@ export default {
   position: relative;
   font-size: 0.7rem;
   top: 50%;
-  color: wheat;
+  color: #f7f7f8;
+  box-shadow: 0px 0px 7px #00000042, inset 8px 7px 8px 0px #020202a1,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #35323200;
+  background-image: linear-gradient(
+    150deg,
+    #90a1b3,
+    #cedcdf 21%,
+    #909ea3,
+    #6e7d7e
+  );
 }
 .infobox .info p {
   margin: 10px;
@@ -248,7 +299,7 @@ export default {
   align-items: center;
 }
 .head_image {
-  background-color: #8b92b4;
+  background-color: #becbce;
   position: absolute;
   /* top: -40%; */
   left: 50%;
@@ -257,11 +308,13 @@ export default {
   z-index: 2;
   font-size: 80px;
   border-radius: 50%;
-  border: 20px solid #535259;
-  box-shadow: 0px 3px 8px 0px rgb(29 27 27 / 49%), inset 0px 0px 18px white;
+  border: 20px solid #becbce;
+  box-shadow: 1px 17px 8px 0px rgba(0, 0, 0, 49%), inset 0px 0px 18px white,
+    0px 3px 0px 1px #a7b4b7, 0px 2px 0px 2px white, 0px 3px 0px 4px #afbec5,
+    0px 6px 0px 4px #8b9598;
 }
 .head_image img {
-  box-shadow: 1px 1px 9px rgb(29 27 27), inset 1px 1px 1px black;
+  box-shadow: 1px 1px 9px rgb(29, 27, 27), inset 1px 1px 1px black;
   display: block;
   width: 2em;
   height: 2em;
@@ -278,16 +331,9 @@ export default {
   width: 80%;
   box-sizing: border-box;
   height: 80vh;
-  border: 10px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
+  @media screen and (max-width: 420px) {
+    padding: 0rem;
+  }
 }
 .record_title {
   position: relative;
@@ -298,7 +344,7 @@ export default {
   /* background-image: linear-gradient(135deg, #fff886 10%, #f072b6 100%); */
   background-image: linear-gradient(135deg, #fff6b7 10%, #f6416c 100%);
   /* background-image: linear-gradient(25deg, #f80091, #d262b2, #9d89d4, #00a7f7); */
-  box-shadow: 1px 1px 7px 0px rgb(0 0 0 / 27%);
+  box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 27%);
   display: flex;
   justify-content: center;
   color: white;
@@ -311,8 +357,14 @@ export default {
   box-shadow: 2px 2px 4px #0000004d, inset 2px 2px 6px white,
     inset -2px -2px 6px #0000005e;
   z-index: 2;
+  @media screen and (max-width: 420px) {
+    background-image: linear-gradient(135deg, #798997 10%, #cbd9dc 100%);
+  }
 }
 .record_title::before {
+  @media screen and (max-width: 420px) {
+    display: none;
+  }
   content: '';
   display: block;
   position: absolute;
@@ -336,6 +388,9 @@ export default {
   background-image: linear-gradient(-135deg, #81ffef 10%, transparent 100%); */
 }
 .record_title::after {
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
   content: '';
   display: block;
   position: absolute;
@@ -358,6 +413,10 @@ export default {
 .right table {
   border-spacing: 10px 10px;
   margin: 0 auto;
+  overflow-y: auto;
+  @media screen and (max-width: 450px) {
+    height: 60vh;
+  }
 }
 .right table tbody {
   margin: 10px;
@@ -377,7 +436,8 @@ export default {
 }
 
 .right table th,
-.right table td {
+.right table td,
+.change_show_btn {
   transition: all 1s;
   text-align: center;
   border-radius: 7px;
@@ -396,9 +456,26 @@ export default {
   color: white;
   box-shadow: 5px 5px 7px #00000042, inset -4px -3px 4px 0px #02020285,
     1px 1px 0px 0px #ffffff, 3px 3px 4px 0px #ffffff4d;
+  @media screen and (max-width: 450px) {
+    text-shadow: 1px 1px 0px #788082;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+  }
+}
+.change_show_btn {
+  padding: 0.5rem;
+}
+thead {
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 }
 .right table th:hover,
-.right table td:hover {
+.right table td:hover,
+.change_show_btn:hover {
   background-image: linear-gradient(
     -51deg,
     #ccdade,
@@ -414,6 +491,11 @@ export default {
 .right table td:nth-child(1) {
   max-width: 5rem;
   min-width: 4rem;
+  @media screen and (max-width: 450px) {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 0.5rem;
+  }
 }
 .examintest {
   border: none;

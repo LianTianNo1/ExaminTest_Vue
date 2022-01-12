@@ -16,7 +16,10 @@
           <div class="taggroup">
             <span>{{ item.tag ? item.tag : '暂无标签' }}</span>
           </div>
-          <strong>创建日期：{{ item.createTime.split('T')[0] }}</strong>
+          <strong>
+            分享者：{{ item.nickname }}<br />
+            创建日期：{{ item.createTime.split('T')[0] }}
+          </strong>
           <div class="buttongroup">
             <button @click="collectExamin(item.data, item.dataName, item.tag)">
               收藏
@@ -31,7 +34,10 @@
           <div class="taggroup">
             <span>{{ item.tag ? item.tag : '暂无标签' }}</span>
           </div>
-          <strong>创建日期：{{ item.createTime.split('T')[0] }}</strong>
+          <strong>
+            分享者：{{ item.nickname }}<br />
+            创建日期：{{ item.createTime.split('T')[0] }}
+          </strong>
           <div class="buttongroup">
             <button @click="collectExamin(item.data, item.dataName, item.tag)">
               收藏
@@ -138,8 +144,18 @@ export default {
 .sharedbox {
   background-color: #f5f7fa;
   background-image: linear-gradient(135deg, #000000 10%, #9faaab 100%);
-  height: 88vh;
+  height: 86vh;
   padding: 50px;
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
 }
 .inputGroup {
   margin: 0 auto;
@@ -151,14 +167,26 @@ export default {
     margin-right: 15px;
     min-width: 230px;
     width: 100%;
-    background-color: #ddddddfc;
-    padding: 0.5rem 0.5rem;
+    background-color: #aebabd;
+    padding: 1rem 1.1rem;
     outline-color: #c7d5d8;
     border: none;
-    border-radius: 4px;
-    box-shadow: -7px 0px 6px #adbcc3a1, 7px 0px 6px #505555;
-    border-left: 10px solid #adbcc3;
-    border-right: 10px solid #475051;
+    border-radius: 9px;
+    box-shadow: 4px 4px 10px #00000080, inset 0px 7px 8px #bbc8cb,
+      inset 0px -7px 8px #b4c1c4, 0px 0px 20px 9px #ffffff14,
+      inset 1px 0px 1px black, inset -1px 0px 1px black;
+    background-image: linear-gradient(
+      150deg,
+      #fafafa,
+      #cedcdf 21%,
+      #ccdadd,
+      #cddadd
+    );
+    /* text-shadow: 1px 1px 0px black,-1px -1px 0px black; */
+    color: #626c6e;
+    letter-spacing: 3px;
+    border-left: 20px solid #ffffff;
+    border-right: 20px solid #475051;
   }
   button {
     width: 72px;
@@ -166,8 +194,7 @@ export default {
     color: white;
     outline: none;
     border: none;
-    box-shadow: 1px 1px 1px white;
-    // background-image: linear-gradient(135deg, #2afadf 10%, #4c83ff 100%);
+    box-shadow: 2px 3px 4px #7e7e7e, inset 2px 2px 8px white;
     display: flex;
     background-image: linear-gradient(
       150deg,
@@ -190,93 +217,110 @@ ul.shared_result {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  height: 67vh;
+  height: 60vh;
   overflow-y: auto;
   align-items: flex-start;
-}
-ul.shared_result li {
-  @media screen and (max-width: 450px) {
-    min-width: 92%;
+  li {
+    @media screen and (max-width: 450px) {
+      min-width: 92%;
+    }
+    min-width: 285px;
+    margin: 10px;
+    background-image: linear-gradient(
+      150deg,
+      #56677a,
+      #cedcdf 21%,
+      #6e777a,
+      #566162
+    );
+    color: white;
+    box-shadow: 6px 2px 7px #00000042, inset 6px -2px 6px 0px #02020285,
+      -1px -1px 0px 0px #ffffff;
+    padding: 1rem;
+    border-left: 20px solid #8e96a5;
+    border-radius: 0 10px 10px 0;
+    width: 20%;
+    p {
+      font-weight: bold;
+      /* font-family: serif; */
+      letter-spacing: 1px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      font-weight: bold;
+      box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
+      text-shadow: 1px 1px 0px #788082, 2px 2px 0px #565e61, 3px 3px 0px #5d6769,
+        -1px -1px 0px white;
+      color: #cddadd;
+      background-color: #99a5a8;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      @media screen and (max-width: 450px) {
+        text-shadow: 1px 1px 0px #788082;
+      }
+    }
+    strong {
+      font-size: 0.7rem;
+      /* font-family: fangsong; */
+      display: block;
+      padding: 0.4rem;
+      margin: 10px 0;
+      box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
+      text-shadow: 1px 1px 0px #788082, 2px 2px 0px #565e61, 3px 3px 0px #5d6769,
+        -1px -1px 0px white;
+      color: #cddadd;
+      background-color: #99a5a8;
+      border-radius: 10px;
+      @media screen and (max-width: 450px) {
+        text-shadow: 1px 1px 0px #788082;
+      }
+    }
+    span {
+      padding: 5px;
+      box-shadow: 2px 2px 5px #878787, inset 0px 0px 0px 0px #ffffff;
+      font-size: 0.6rem;
+      // background-color: orange;
+      background-image: linear-gradient(
+        25deg,
+        #d9027a,
+        #b9519b,
+        #8b73bd,
+        #158ce1
+      );
+      border-radius: 4px;
+      display: block;
+      padding: 0.2rem 0.5rem;
+      margin: 0.2rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background-image: linear-gradient(
+        150deg,
+        #56677a,
+        #cedcdf 8%,
+        #6e777a,
+        #566162
+      );
+      color: white;
+      box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
+        1px 1px 0px 0px #ffffff6b;
+      transition: all 0.5s;
+    }
   }
-  min-width: 285px;
-  margin: 10px;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
-  color: white;
-  box-shadow: 6px 8px 7px #00000042, inset 3px -1px 4px 0px #02020285,
-    -1px -1px 3px 1px #ffffff;
-  padding: 1rem;
-  border-left: 20px solid #8e96a5;
-  border-radius: 0 10px 10px 0;
-  width: 20%;
-}
-ul.shared_result li p {
-  font-weight: bold;
-  font-family: serif;
-  letter-spacing: 1px;
-  font-size: 1rem;
-  /* text-shadow: 1px 1px 1px black; */
-  padding: 0.5rem;
-  box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
-  color: #5c5c5c;
-  background-color: #f7d197;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-ul.shared_result li strong {
-  font-size: 0.5rem;
-  font-family: fangsong;
-  display: block;
-  padding: 0.4rem;
-  margin: 10px 0;
-  box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
-  color: #5c5c5c;
-  background-color: #f7d197;
-  border-radius: 10px;
 }
 .taggroup {
   display: flex;
   justify-content: flex-start;
   margin: 1rem 0;
 }
-ul.shared_result li span {
-  padding: 5px;
-  box-shadow: 2px 2px 5px #878787, inset 0px 0px 0px 0px #ffffff;
-  font-size: 0.6rem;
-  // background-color: orange;
-  background-image: linear-gradient(25deg, #d9027a, #b9519b, #8b73bd, #158ce1);
-  border-radius: 4px;
-  display: block;
-  padding: 0.2rem 0.5rem;
-  margin: 0.2rem;
-}
-ul.shared_result li button {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 8%,
-    #6e777a,
-    #566162
-  );
-  color: white;
-  box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
-    1px 1px 0px 0px #ffffff6b;
-  transition: all 0.5s;
-}
 .buttongroup {
   margin-top: 15px;
   display: flex;
@@ -284,32 +328,6 @@ ul.shared_result li button {
   align-items: center;
 }
 
-// .buttongroup button:nth-child(1) {
-//   // background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%);
-//   background-image: linear-gradient(
-//     150deg,
-//     #56677a,
-//     #cedcdf 8%,
-//     #6e777a,
-//     #566162
-//   );
-//   color: white;
-//   box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
-//     1px 1px 0px 0px #ffffff6b;
-// }
-// .buttongroup button:nth-child(2) {
-//   // background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%);
-//   background-image: linear-gradient(
-//     150deg,
-//     #56677a,
-//     #cedcdf 8%,
-//     #6e777a,
-//     #566162
-//   );
-//   color: white;
-//   box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
-//     1px 1px 0px 0px #ffffff6b;
-// }
 .buttongroup button:hover {
   background-image: linear-gradient(
     318deg,

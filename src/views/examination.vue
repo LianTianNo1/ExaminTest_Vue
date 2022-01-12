@@ -17,9 +17,11 @@
       <leftItem
         :total_data="total_data"
         :leftShow="leftShow"
+        :leftItemShow="leftItemShow"
         @parentChooseItem="chooseItem($event)"
+        @parentChangeLeftShow="changeLeftShow($event)"
       ></leftItem>
-      <div class="right">
+      <div :class="['right', { right_full: leftItemShow }]">
         <div class="sign_exercises_box">
           <div
             v-show="index === sign_item_index"
@@ -170,10 +172,20 @@
             </div>
           </div>
         </div>
-        <div @click="nextItem" class="next_item">下一题</div>
-        <div @click="preItem" class="next_item">上一题</div>
-        <div @click="showResult" class="submit">提交</div>
-        <div @click="emptyReset" class="submit">重新选择文件</div>
+        <div @click="nextItem" class="next_item el-icon-caret-bottom">
+          下一题
+        </div>
+        <div @click="preItem" class="next_item el-icon-caret-top">上一题</div>
+        <div @click="showResult" class="submit el-icon-s-claim">提交</div>
+        <div @click="emptyReset" class="submit el-icon-refresh">
+          重新选择文件
+        </div>
+        <div
+          @click="leftItemShow = !leftItemShow"
+          class="submit el-icon-collection-tag"
+        >
+          {{ leftItemShow ? '显示' : '隐藏' }}题号
+        </div>
       </div>
     </div>
   </div>
@@ -201,6 +213,8 @@ export default {
   },
   data() {
     return {
+      // 控制left出现
+      leftItemShow: false,
       toggleFlag: true,
       // 单选题库索引，题目，正确答案等等
       sign_list_data: {},
@@ -267,6 +281,11 @@ export default {
     emptyReset() {
       this.setNowTestExamin({})
       this.$emit('reloadComponent')
+    },
+    // 切换题号
+    changeLeftShow(e) {
+      console.log(e)
+      this.leftItemShow = e
     },
     // 触发文件选择
     targetChooseFile() {
@@ -550,7 +569,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   margin: 0;
   padding: 0;
@@ -571,7 +590,7 @@ body {
   left: 0;
   width: 100vw;
   height: 88vh;
-  background: rgb(0 0 0 / 72%);
+  background: rgba(0, 0, 0, 72%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -588,14 +607,6 @@ body {
 }
 .uploadfile_btn:hover {
   background-color: #35a7ff;
-}
-#app {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between; */
-  /* overflow: hidden; */
-  margin: 0;
-  background-color: #9da8b6;
 }
 .choose_file {
   width: 0;
@@ -615,6 +626,15 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
+  border: 5px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #9fabae, 3px 3px 0px #8b9598,
+    4px 4px 0px #9da9ac, 5px 5px 0px #f7f7f7;
+  background-image: linear-gradient(25deg, #ee526a, #d0779a, #a094cb, #20adff);
+  @media screen and (max-width: 450px) {
+    text-shadow: 1px 1px 0px #788082;
+  }
 }
 .head_title {
   color: #336699;
@@ -634,35 +654,55 @@ body {
   overflow: hidden;
   justify-content: space-between;
 }
-
+.right_full {
+  width: 100% !important;
+}
 .right {
-  height: 100%;
+  transition: all 1s;
+  height: 86vh;
+  overflow-y: auto;
   width: 75%;
   background: #f5f7fa;
   box-shadow: -1px -1px 7px #00000033;
   padding: 2rem;
-}
-.sign_exercises_box {
-  /* background-color: rgba(173, 115, 115, 0.438); */
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
 }
 .exercises_item {
   display: block;
 }
 .etile {
-  color: #008c9e;
+  color: #646e70;
   display: flex;
   padding: 1rem 2rem;
   font-weight: bold;
   font-size: 1rem;
-  border-left: 10px solid #50c1e9;
+  text-shadow: 1px 1px white;
+  border-left: 20px solid #50c1e9;
   box-shadow: 1px 1px 7px #a5939333;
   margin-bottom: 2rem;
+  box-shadow: 3px 3px 7px 2px #5b565654, inset 3px 0px 3px #00000054;
+  background: linear-gradient(335deg, #cbd9dc, #b1bec0, #c0ced1, #c6d3d6);
 }
 .hide_item {
+  @media screen and (max-width: 450px) {
+    margin: 0;
+  }
   display: none;
   color: white;
-  padding: 1rem 1rem 1rem 5rem;
+  padding: 0.4rem;
   box-shadow: 3px 3px 7px 2px #a5939333;
+  /* font-weight: bold; */
+  text-align: center;
+  letter-spacing: 2px;
   cursor: pointer;
   position: relative;
   margin: 20px 0;
@@ -670,15 +710,28 @@ body {
 }
 .choose_item {
   padding: 0.6rem 0.6rem 0.6rem 4rem;
-  box-shadow: 3px 3px 7px 2px #a5939333;
+  box-shadow: 3px 3px 7px 2px #5b565654;
   cursor: pointer;
+  background: linear-gradient(335deg, #b5c2c5, #9aa9b3, #c0ced1, #b2bfc2);
   font-size: 0.7rem;
+  letter-spacing: 1px;
+  font-family: fangsong;
   position: relative;
   margin: 20px 0;
 }
+
 .choose_item_active {
-  background-color: #c3c3e5;
+  background-image: linear-gradient(135deg, transparent 10%, #f067b4 100%);
+  background-color: #81ffef;
   color: white;
+  text-shadow: 1px 1px 0px #3e4854, 2px 2px 0px #949c9f;
+  animation: choose_item_active 1s;
+}
+@keyframes choose_item_active {
+  to {
+    background-color: #f16b6f;
+    background-image: linear-gradient(135deg, #81ffef 10%, transparent 100%);
+  }
 }
 .choose_item::before {
   position: absolute;
@@ -689,6 +742,7 @@ body {
   height: 100%;
   width: 3rem;
   top: 0;
+  box-shadow: 1px 0px 1px #0000005e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -716,19 +770,23 @@ body {
 }
 .next_item,
 .submit {
-  margin: 1rem 0;
+  margin: 0.4rem 0;
   background-color: #f16b6f;
   color: white;
   display: flex;
   justify-content: center;
+  border-radius: 10px;
   align-items: center;
   font-size: 0.6rem;
   padding: 0.6rem 0;
   cursor: pointer;
-  box-shadow: 3px 3px 7px 2px #a5939333;
+  background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
+  box-shadow: 3px 3px 7px 2px #5b565654, inset 1px 1px 3px white,
+    inset -1px -1px 5px black;
 }
 .submit {
   background-color: #35a7ff;
+  background-image: linear-gradient(25deg, #822ef6, #7d73f7, #6aa7f8, #2bd8f7);
 }
 .err_container {
   /* overflow: hidden; */
@@ -750,17 +808,48 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background-color: #96adc8;
-}
-.error_list .exercises_item {
-  width: 28%;
-  margin-bottom: 2rem;
-  box-shadow: 1px 1px 7px #00000033;
-  border-radius: 15px;
-  background-color: #f5f5f5;
-  overflow: hidden;
-}
-.error_list .exercises_item .etile {
-  font-size: 1rem;
+  /* background-color: #96adc8; */
+  border: 10px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
+  .choose_item {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  .exercises_item {
+    @media screen and (max-width: 450px) {
+      width: 90%;
+    }
+    width: 28%;
+    margin-bottom: 2rem;
+    box-shadow: 1px 1px 7px #00000033;
+    border-radius: 15px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    border: 5px solid #cbd9dc;
+    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+    background-image: linear-gradient(
+      150deg,
+      #56677a,
+      #cedcdf 21%,
+      #6e777a,
+      #566162
+    );
+  }
+  .exercises_item .etile {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    @media screen and (max-width: 450px) {
+      padding: 0.5rem 0.5rem;
+    }
+  }
 }
 </style>

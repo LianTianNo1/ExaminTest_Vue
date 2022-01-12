@@ -4,13 +4,21 @@
       <div class="head_title">小浪简陋做题</div>
       <div class="rightgroupIcon el-icon-menu"></div>
       <div class="rightgroup">
-        <router-link to="/examination">上传练习</router-link>
-        <router-link to="/shareCenter">共享中心</router-link>
-        <router-link to="/userCenter">个人中心</router-link>
-        <router-link v-if="!isLogin" to="/LoginAndRegister"
+        <router-link class="el-icon-upload2" to="/examination"
+          >上传练习</router-link
+        >
+        <router-link class="el-icon-connection" to="/shareCenter"
+          >共享中心</router-link
+        >
+        <router-link class="el-icon-user" to="/userCenter"
+          >个人中心</router-link
+        >
+        <router-link class="el-icon-key" v-if="!isLogin" to="/LoginAndRegister"
           >登录/注册</router-link
         >
-        <a href="#" @click.stop="logout" v-else>退出登录</a>
+        <a href="#" class="el-icon-circle-close" @click.stop="logout" v-else
+          >退出登录</a
+        >
       </div>
     </div>
     <keep-alive exclude="examination">
@@ -79,6 +87,16 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 10vh;
+  border: 5px solid #cbd9dc;
+  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+  background-image: linear-gradient(
+    150deg,
+    #56677a,
+    #cedcdf 21%,
+    #6e777a,
+    #566162
+  );
 }
 
 .head_title {
@@ -96,6 +114,7 @@ body {
   align-items: center;
   @media screen and (max-width: 450px) {
     font-size: 1rem;
+    text-shadow: 1px 1px 0px #7d878a;
   }
 }
 .rightgroupIcon {
@@ -115,12 +134,22 @@ body {
     display: none;
     z-index: 999999999999999;
     height: 300px;
-    background-color: #333238;
+    // background-color: #333238;
     position: absolute;
     top: 0;
     right: 10px;
     flex-direction: column;
     justify-content: space-evenly;
+    border: 5px solid #cbd9dc;
+    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
+      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
+    background-image: linear-gradient(
+      150deg,
+      #56677a,
+      #cedcdf 21%,
+      #6e777a,
+      #566162
+    );
   }
 }
 .headinfo a {
@@ -133,13 +162,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: 4px;
   transition: all cubic-bezier(1, -0.34, 0, 0.02) 0.6s;
   @media screen and (max-width: 419px) {
     height: 40px;
   }
 }
 .headinfo a:hover {
-  background: #414047;
-  color: white;
+  background: #879194;
+  text-shadow: 1px 1px 0px #8a9497, 2px 2px 0px #c5d2d5, 3px 3px 0px #5b6667,
+    -1px -1px 0px white;
+  // letter-spacing: 4px;
+  // color: white;
+  box-shadow: 1px 1px 1px #a9b5b8, inset 1px 1px 4px #00000021,
+    inset 4px 4px 6px #00000085;
 }
 </style>
