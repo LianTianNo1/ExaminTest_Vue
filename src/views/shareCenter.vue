@@ -220,7 +220,13 @@ ul.shared_result {
   height: 60vh;
   overflow-y: auto;
   align-items: flex-start;
+  li:hover {
+    transform: translate(0, -10px);
+    box-shadow: 6px 16px 17px 0px #4a4a4a9e, inset -1px 2px 6px 0px #02020285,
+      -1px -1px 0px 0px #ffffff;
+  }
   li {
+    transition: all 0.5s;
     @media screen and (max-width: 450px) {
       min-width: 92%;
     }

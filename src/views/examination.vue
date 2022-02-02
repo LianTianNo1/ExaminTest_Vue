@@ -590,7 +590,7 @@ body {
   left: 0;
   width: 100vw;
   height: 88vh;
-  background: rgba(0, 0, 0, 72%);
+  background: #000000b0;
   display: flex;
   justify-content: center;
   align-items: center;

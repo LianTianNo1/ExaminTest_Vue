@@ -309,7 +309,7 @@ export default {
   font-size: 80px;
   border-radius: 50%;
   border: 20px solid #becbce;
-  box-shadow: 1px 17px 8px 0px rgba(0, 0, 0, 49%), inset 0px 0px 18px white,
+  box-shadow: 1px 17px 8px 0px #757575, inset 0px 0px 18px white,
     0px 3px 0px 1px #a7b4b7, 0px 2px 0px 2px white, 0px 3px 0px 4px #afbec5,
     0px 6px 0px 4px #8b9598;
 }

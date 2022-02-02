@@ -4,6 +4,9 @@
       <div class="head_title">小浪简陋做题</div>
       <div class="rightgroupIcon el-icon-menu"></div>
       <div class="rightgroup">
+        <router-link class="el-icon-collection-tag" to="/start"
+          >开始</router-link
+        >
         <router-link class="el-icon-upload2" to="/examination"
           >上传练习</router-link
         >
