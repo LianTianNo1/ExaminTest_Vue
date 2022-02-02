@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="headinfo">
-      <div class="head_title">小浪简陋做题</div>
+      <img class="head_title" src="../assets/logo.png" />
+
       <div class="rightgroupIcon el-icon-menu"></div>
       <div class="rightgroup">
         <router-link class="el-icon-collection-tag" to="/start"
@@ -84,44 +85,20 @@ body {
 .headinfo {
   padding: 0 2rem;
   margin-bottom: 2vh;
-  background-color: #333238;
-  box-shadow: 0px 1px 7px #00000033;
+  box-shadow: 0px 5px 40px 0px #113a5d1a;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
-  border: 5px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
+  height: 6vh;
+  background: #fff;
 }
 
 .head_title {
   height: 100%;
-  color: white;
-  padding: 0 20px;
-  font-weight: bold;
-  font-size: 1.8rem;
-  display: flex;
-  justify-content: center;
-  text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #9fabae, 3px 3px 0px #8b9598,
-    4px 4px 0px #9da9ac, 5px 5px 0px #f7f7f7;
-  font-family: fantasy;
-  letter-spacing: 10px;
-  align-items: center;
-  @media screen and (max-width: 450px) {
-    font-size: 1rem;
-    text-shadow: 1px 1px 0px #7d878a;
-  }
+  padding: 9px 15px;
 }
 .rightgroupIcon {
-  color: white;
+  color: #6d6d6d;
   display: none;
   cursor: pointer;
   @media screen and (max-width: 450px) {
@@ -137,47 +114,32 @@ body {
     display: none;
     z-index: 999999999999999;
     height: 300px;
-    // background-color: #333238;
     position: absolute;
     top: 0;
     right: 10px;
     flex-direction: column;
+    background-color: #fff;
     justify-content: space-evenly;
-    border: 5px solid #cbd9dc;
-    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-    background-image: linear-gradient(
-      150deg,
-      #56677a,
-      #cedcdf 21%,
-      #6e777a,
-      #566162
-    );
+    box-shadow: 6px 8px 7px #00000042;
   }
 }
 .headinfo a {
   float: left;
-  color: white;
+  color: #121212;
   padding: 0 1rem;
   text-decoration: none;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  letter-spacing: 4px;
-  transition: all cubic-bezier(1, -0.34, 0, 0.02) 0.6s;
+  transition: all cubic-bezier(1, -0.34, 0, 0.02) 0.3s;
   @media screen and (max-width: 419px) {
     height: 40px;
   }
 }
 .headinfo a:hover {
-  background: #879194;
-  text-shadow: 1px 1px 0px #8a9497, 2px 2px 0px #c5d2d5, 3px 3px 0px #5b6667,
-    -1px -1px 0px white;
-  // letter-spacing: 4px;
-  // color: white;
-  box-shadow: 1px 1px 1px #a9b5b8, inset 1px 1px 4px #00000021,
-    inset 4px 4px 6px #00000085;
+  border-bottom: 3px solid #ff5e00;
+  border-radius: 0 0 2px 2px;
 }
 </style>

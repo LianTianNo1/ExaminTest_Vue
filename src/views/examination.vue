@@ -575,13 +575,25 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #96adc8;
-}
+
 .exmination-box {
   position: relative;
+  overflow: hidden;
+  height: 92vh;
+}
+.exmination-box::after {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(20px);
+  box-shadow: inset 0px 3px 0px 3px black;
+  content: '';
+  background: url(../assets/bg.png) no-repeat;
+  background-size: cover;
+  transform: perspective(1px) scale(1.1);
+  z-index: -1;
 }
 .uploadfile {
   z-index: 99;
@@ -589,12 +601,13 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 88vh;
+  height: 92vh;
   background: #000000b0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .uploadfile_btn {
   padding: 1rem 2rem;
   color: white;
@@ -621,20 +634,12 @@ body {
 .head_nav {
   color: white;
   background-color: #ff6600;
-  font-size: 1rem;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
-  border: 5px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #9fabae, 3px 3px 0px #8b9598,
-    4px 4px 0px #9da9ac, 5px 5px 0px #f7f7f7;
+  padding: 0.6rem 0;
   background-image: linear-gradient(25deg, #ee526a, #d0779a, #a094cb, #20adff);
-  @media screen and (max-width: 450px) {
-    text-shadow: 1px 1px 0px #788082;
-  }
 }
 .head_title {
   color: #336699;
@@ -642,14 +647,12 @@ body {
   height: 10vh;
   font-weight: bold;
   font-size: 2rem;
-  /* padding: 1rem; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .container {
   width: 100%;
-  /* height: 100vh; */
   display: flex;
   overflow: hidden;
   justify-content: space-between;
@@ -659,38 +662,47 @@ body {
 }
 .right {
   transition: all 1s;
-  height: 86vh;
+  height: 92vh;
   overflow-y: auto;
   width: 75%;
-  background: #f5f7fa;
+  background: #ffffff2e;
   box-shadow: -1px -1px 7px #00000033;
   padding: 2rem;
-  border: 10px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
 }
 .exercises_item {
   display: block;
 }
 .etile {
-  color: #646e70;
+  color: #4d4d4d;
   display: flex;
   padding: 1rem 2rem;
   font-weight: bold;
   font-size: 1rem;
-  text-shadow: 1px 1px white;
-  border-left: 20px solid #50c1e9;
-  box-shadow: 1px 1px 7px #a5939333;
+  text-shadow: 2px 1px #ababab;
+  border-left: 20px solid #5cd4ff;
   margin-bottom: 2rem;
-  box-shadow: 3px 3px 7px 2px #5b565654, inset 3px 0px 3px #00000054;
-  background: linear-gradient(335deg, #cbd9dc, #b1bec0, #c0ced1, #c6d3d6);
+  box-shadow: 4px 3px 8px 0px #5b565654, inset 3px 0px 3px #00000054;
+  background: linear-gradient(335deg, #ffffff, #ffffff, #e8edef, #f8f8f8);
+  -webkit-clip-path: polygon(
+    0px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 0px),
+    0 20px
+  ) !important;
+  clip-path: polygon(
+    0px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 0px),
+    0 20px
+  ) !important;
 }
 .hide_item {
   @media screen and (max-width: 450px) {
@@ -712,12 +724,22 @@ body {
   padding: 0.6rem 0.6rem 0.6rem 4rem;
   box-shadow: 3px 3px 7px 2px #5b565654;
   cursor: pointer;
-  background: linear-gradient(335deg, #b5c2c5, #9aa9b3, #c0ced1, #b2bfc2);
   font-size: 0.7rem;
   letter-spacing: 1px;
   font-family: fangsong;
   position: relative;
+  background: #fafafaa3;
   margin: 20px 0;
+  clip-path: polygon(
+    0px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 0px),
+    0 20px
+  ) !important;
 }
 
 .choose_item_active {
@@ -802,8 +824,8 @@ body {
 .error_list {
   padding-top: 2rem;
   width: 100vw;
-  /* height: 100vw; */
-  /* overflow-y: scroll; */
+  height: calc(90vh - 1.2rem);
+  overflow-y: scroll;
   position: relative;
   display: flex;
   justify-content: space-evenly;
@@ -819,6 +841,7 @@ body {
     #6e777a,
     #566162
   );
+
   .choose_item {
     margin: 5px 0;
     font-size: 1rem;

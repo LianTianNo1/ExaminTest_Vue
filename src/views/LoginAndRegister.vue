@@ -2,6 +2,9 @@
   <div class="box">
     <div class="wrap">
       <form>
+        <h3 :class="['form_title', { form_title_r: !loginShow }]">
+          {{ !loginShow ? 'Registered' : 'Login' }}
+        </h3>
         <label v-if="!loginShow" for="nickName">昵称</label>
         <input
           v-if="!loginShow"
@@ -62,7 +65,7 @@ export default {
       this.updataUserInfo(userInfo)
       sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
       this.updataStatus(JSON.parse(sessionStorage.getItem('isLogin')))
-      this.router.push('/userCenter');
+      this.router.push('/start');
     },
 
     toggleStatus() {
@@ -75,128 +78,109 @@ export default {
 .box {
   width: 100%;
   padding: 1rem;
-  height: 86vh;
-  background-color: white;
+  height: calc(100vh - 8vh);
+  // height: 86vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: 10px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #eb3b3b,
-    #934fc3 21%,
-    #86e0ff,
-    #0c9dce
-  );
-  background-size: 400% 400%;
-  animation: bgmove 6s infinite alternate;
+  position: relative;
+  background: #fff;
+  box-shadow: 0px 0px 2px #627c991a;
+  overflow: hidden;
 }
-@keyframes bgmove {
-  0% {
-    background-position: 0% 0%;
-  }
-  25% {
-    background-position: 100% 0%;
-  }
-  50% {
-    background-position: 50% 50%;
-  }
-  75% {
-    background-position: 100% 100%;
-  }
-  to {
-    background-position: 0% 100%;
-  }
+.box::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(20px);
+  box-shadow: inset 0px 3px 0px 3px black;
+  content: '';
+  background: url(../assets/bg.png) no-repeat;
+  background-size: cover;
+  transform: perspective(1px) scale(1.1);
 }
 .wrap {
   padding: 1rem;
+  width: 35%;
+  @media screen and (max-width: 410px) {
+    width: 100%;
+  }
   form {
     position: relative;
     color: white;
-    padding: 1.5rem;
     z-index: 2;
-    /* background-color: #1f2845d6; */
-    /* box-shadow: 3px 5px 20px 2px #00000040, 0px 0px 20px 1px #ffffff5c; */
-    border: 10px solid #cbd9dc;
-    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-    background-image: linear-gradient(
-      150deg,
-      #56677a,
-      #cedcdf 21%,
-      #6e777a,
-      #566162
-    );
+    box-shadow: 6px 8px 11px #00000042;
+    padding: 30px 24px 24px;
+    background: #fff;
+    border-radius: 4px;
+    background-repeat: no-repeat;
+    .form_title {
+      color: #fc9db4;
+      text-shadow: 2px 1px 0px #f16083, -1px -1px white;
+      margin-bottom: 1rem;
+      top: -22%;
+      font-size: 2.5rem;
+      text-align: center;
+      position: absolute;
+      width: calc(100% - 48px);
+      transition: all 1s;
+    }
+    .form_title_r {
+      color: #fffdfa;
+      text-shadow: 4px 3px 0px #f27474, -1px -2px #606675;
+    }
     input {
-      min-width: 20vw;
+      // min-width: 20vw;
       margin: 0.4rem 0 1rem;
-      /* height: 1.3rem; */
-      padding-left: 1rem;
-      color: white;
-      padding: 0.5rem 1rem;
-      font-size: 0.7rem;
-      /* outline: none; */
-      outline-color: #4e5c77;
-      border-radius: 0.2rem;
+      outline-color: #ffbc9c;
+      border-radius: 4px;
       border: none;
-      box-shadow: 1px 1px 6px #ffffff, inset 3px 3px 9px 0px #00000070;
-      text-shadow: 1px 1px 0px #788082, 2px 2px 0px #565e61, 3px 3px 0px #5d6769,
-        -1px -1px 0px white;
-      color: #cddadd;
+      color: #3b3b3b;
       letter-spacing: 4px;
-      background-color: #99a5a8;
-      @media screen and (max-width: 450px) {
-        text-shadow: 1px 1px 0px #788082;
-      }
+      width: 100%;
+      padding: 10px;
+      transition: 0.3s;
+      border: 1px solid #e8e8e8;
+      font-size: 20px;
+      height: 48px;
+      padding-right: 46px;
     }
     label {
       display: block;
-      position: relative;
-      letter-spacing: 10px;
-      font-size: 0.8rem;
+      position: absolute;
+      letter-spacing: 4px;
+      color: #b2bac2;
+      left: 42px;
+      padding: 0 7px;
+      background: #fff;
+      font-size: 15px;
     }
     button {
       margin: 1rem 0;
       cursor: pointer;
-      width: 100%;
-      font-size: 0.8rem;
-      padding: 0.5rem 2rem;
-      border: none;
-      letter-spacing: 5px;
-      border-radius: 8px;
-      font-weight: bold;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 1s;
+      // transition: all 1s;
+      transition: opacity 0.2s;
       font-family: serif;
-      background-image: linear-gradient(
-        150deg,
-        #56677a,
-        #cedcdf 1%,
-        #6e777a,
-        #566162
-      );
-      color: white;
-      box-shadow: 6px 4px 7px #00000042, inset -4px -3px 4px 0px #02020285,
-        1px 1px 0px 0px #ffffff6b;
       transition: all 0.5s;
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 400;
+      background: #0066ff;
+      border-radius: 4px;
+      color: white;
+      border: 1px solid #fc9db4;
+      background-color: #fbecd1;
+      background-image: linear-gradient(90deg, transparent, #ff99b1);
     }
     button:hover {
-      background-image: linear-gradient(
-        318deg,
-        #56677a,
-        #cedcdf 1%,
-        #6e777a,
-        #566162
-      );
-      color: white;
-      box-shadow: -1px 1px 7px #00000042, inset 3px 3px 4px 0px #02020285,
-        1px 1px 0px 0px #fffffff5, inset -3px -3px 7px #00000042;
+      opacity: 0.9;
+      background-color: #ff99b1;
+      background-image: linear-gradient(90deg, #fbecd1, transparent);
+      border: 1px solid #fbecd1;
     }
   }
 }

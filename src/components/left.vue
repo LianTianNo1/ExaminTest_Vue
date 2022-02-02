@@ -43,7 +43,7 @@ export default {
 </script>
 <style  scoped>
 .left {
-  height: 86vh;
+  height: 92vh;
   width: 23%;
   padding: 1rem;
   background-color: #f5f7fa;
@@ -52,22 +52,13 @@ export default {
   padding-bottom: 6rem;
   min-width: 350px;
   max-width: 350px;
-  border: 10px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
+  background-color: rgba(255, 255, 255, 0.274);
   transition: all 1s;
 }
 .left_btn {
   height: 2rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,8 +71,8 @@ export default {
     inset -2px -2px 2px #0000007a;
   text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #5d6567, 3px 3px 0px #ffffff,
     4px 4px 0px #606568;
-  background-image: linear-gradient(45deg, transparent, #fbbc37, #6c9ff7);
-  background-color: #f65f52;
+  background-image: linear-gradient(45deg, transparent 32%, #087ee9);
+  background-color: #ff5142;
   transition: all 2s;
 }
 .left_btn:hover {
@@ -98,23 +89,15 @@ export default {
 .left_title {
   height: 2rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  border-left: 10px solid #50c1e9;
+  border-left: 10px solid #e2ebee;
   box-shadow: 3px 0px 7px 1px #00000066, inset 1px 0px 1px #000000;
-  text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #5d6567, 3px 3px 0px #ffffff,
-    4px 4px 0px #606568;
-  background-image: linear-gradient(
-    45deg,
-    #ffffff,
-    #d9d9d9,
-    #bbc8cb,
-    #b9c6c9,
-    #c6d4d7
-  );
+  text-shadow: 1px 1px 0px #151515, 2px 2px 0px #cbcbcb;
+  background-image: linear-gradient(45deg, #323232, #323232);
 }
 .left_item {
   padding: 1rem 0;
@@ -129,25 +112,24 @@ export default {
   width: 1.5rem;
   height: 1.5rem;
   margin: 0.2rem;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #5a697a;
   display: flex;
   justify-content: center;
   border-radius: 8px;
   align-items: center;
-  background: #f5f7fa;
-  box-shadow: 1px 1px 0px #ffffff91, inset -1px -1px 2px #0000007d,
-    inset -1px -1px 0px #63636387;
+  background: #ffffff;
+  box-shadow: 2px 2px 0px #71717191;
 }
 .serial_visited {
   background-image: linear-gradient(
     115deg,
-    #b4f1fd,
-    #4edaf5 25%,
-    #09668f,
-    #023446
+    #7e60f7,
+    #804af7 25%,
+    #7e6cf7,
+    #66abf8
   );
-  box-shadow: inset 1px 1px 5px #588294;
+  box-shadow: 2px 2px 0px #63d0ff;
   color: white;
 }
 </style>
