@@ -177,9 +177,7 @@ export default {
     outline-color: transparent;
     border: none;
     border-radius: 9px;
-    box-shadow: 4px 4px 10px #00000080, inset 0px 4px 8px #bbc8cb,
-      inset 0px -4px 8px #b4c1c4, 0px 0px 20px 9px #ffffff14,
-      inset 1px 0px 1px black, inset -1px 0px 1px black;
+    box-shadow: 6px 5px 8px #0000003b, inset 6px 8px 10px #ffffff;
     background-image: linear-gradient(
       150deg,
       #fafafa,
@@ -187,7 +185,6 @@ export default {
       #c4d2d5,
       #e9fbff
     );
-    /* text-shadow: 1px 1px 0px black,-1px -1px 0px black; */
     color: #626c6e;
     letter-spacing: 3px;
     border-left: 20px solid #eb4d4b;

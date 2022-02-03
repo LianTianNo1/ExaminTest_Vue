@@ -343,24 +343,38 @@ export default {
 }
 .record_title {
   position: relative;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: #505c76;
+  font-size: 0.7rem;
+  background-color: #ecf5ff9e;
   margin-bottom: 1rem;
-  background-image: linear-gradient(135deg, #15a0ee 10%, #b35eba 100%);
-  display: flex;
-  justify-content: center;
-  color: white;
-  align-items: center;
+  color: #8f8f8f;
   padding: 0.8rem;
   border-radius: 8px;
-  border-radius: 10px;
   letter-spacing: 4px;
-  // box-shadow: 2px 2px 4px #0000004d, inset 2px 2px 6px white,
-  //   inset -2px -2px 6px #0000005e;
+  border-radius: 10px;
+  border-left: 18px solid #ffc71c;
   z-index: 2;
+  -webkit-clip-path: polygon(
+    0px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 0px),
+    0 20px
+  ) !important;
+  clip-path: polygon(
+    0px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 0px),
+    0 20px
+  ) !important;
+  box-shadow: inset 3px 0px 5px #0000001f;
 }
-
 .right table {
   border-spacing: 10px 10px;
   margin: 0 auto;
@@ -380,7 +394,7 @@ export default {
   letter-spacing: 3px;
 }
 .right table p {
-  margin: 0.5rem;
+  margin: 0.3rem;
 }
 .right table th {
   padding: 1rem 0;
@@ -394,11 +408,13 @@ export default {
   font-size: 14px;
   font-family: serif;
   font-weight: bold;
-  color: white;
+  color: #727272;
   position: relative;
   background-image: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 400%;
   border-radius: 50px;
+  background: #fff6;
+  box-shadow: 1px 1px #00000024, -1px -1px #ffffffb5;
   z-index: 1;
   @media screen and (max-width: 450px) {
     display: flex;
@@ -418,10 +434,10 @@ export default {
   right: -1px;
   top: -1px;
   bottom: -1px;
-  background-image: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 400%;
   border-radius: 55px;
   filter: blur(15px);
+  background: #fff6;
   z-index: -1;
 }
 @keyframes btn_move {
@@ -444,6 +460,9 @@ thead {
 .right table td:hover::before,
 .change_show_btn:hover::before,
 .head_image:hover:before {
+  background-image: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  color: white;
   animation: btn_move 8s infinite;
 }
 .right table th:nth-child(1),
@@ -459,10 +478,9 @@ thead {
 .examintest {
   border: none;
   outline: none;
-  margin: 0 10px;
+  margin: 4px 10px;
   cursor: pointer;
-  padding: 0.5rem 0.6rem;
-  text-shadow: -1px -1px 0px #d0dae8, 1px 1px 0px #000000;
+  padding: 0.3rem 0.6rem;
   transition: all 1s;
   border-radius: 10px;
   background-image: linear-gradient(
@@ -473,53 +491,22 @@ thead {
     #566162
   );
   color: white;
-  box-shadow: 5px 5px 7px #00000042, inset -4px -3px 4px 0px #02020285,
-    1px 1px 0px 0px #ffffff, 3px 3px 4px 0px #ffffff4d;
+  box-shadow: 3px 6px 7px #00000059, inset -4px -2px 4px 0px #02020247;
 }
 .examintest:nth-child(1) {
-  background-image: linear-gradient(
-    150deg,
-    #8ddff5,
-    #a5eeff 21%,
-    #2393bb,
-    #0d82a9
-  );
+  background-image: linear-gradient(150deg, #8ddff5, #0d82a9);
 }
 .examintest:nth-child(1):hover {
-  background-image: linear-gradient(
-    -51deg,
-    #8ddff5,
-    #a5eeff 21%,
-    #2393bb,
-    #0d82a9
-  );
+  background-image: linear-gradient(-51deg, #8ddff5, #0d82a9);
 }
 .examintest:nth-child(2) {
-  background-image: linear-gradient(
-    150deg,
-    #f56c6c,
-    #ffb8c8 21%,
-    #dd0930,
-    #990505
-  );
+  background-image: linear-gradient(150deg, #f56c6c, #990505);
 }
 .examintest:nth-child(2):hover {
-  background-image: linear-gradient(
-    -51deg,
-    #f56c6c,
-    #ffb8c8 21%,
-    #dd0930,
-    #990505
-  );
+  background-image: linear-gradient(-51deg, #f56c6c, #990505);
 }
 .examintest:nth-child(3) {
-  background-image: linear-gradient(
-    150deg,
-    #6cf5d5,
-    #bff9d9 21%,
-    #319361,
-    #379b06
-  );
+  background-image: linear-gradient(150deg, #6cf5d5, #379b06);
 }
 .examintest:nth-child(3):hover {
   background-image: linear-gradient(

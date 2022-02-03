@@ -611,12 +611,13 @@ export default {
 .uploadfile_btn {
   padding: 1rem 2rem;
   color: white;
-  background-color: #ff5964;
+  background-color: #fb7299;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 1s;
+  border-radius: 4px;
 }
 .uploadfile_btn:hover {
   background-color: #35a7ff;
@@ -673,12 +674,11 @@ export default {
   display: block;
 }
 .etile {
-  color: #4d4d4d;
+  color: #717171;
   display: flex;
   padding: 1rem 2rem;
   font-weight: bold;
   font-size: 1rem;
-  text-shadow: 2px 1px #ababab;
   border-left: 20px solid #5cd4ff;
   margin-bottom: 2rem;
   box-shadow: 4px 3px 8px 0px #5b565654, inset 3px 0px 3px #00000054;

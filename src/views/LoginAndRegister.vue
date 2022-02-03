@@ -5,16 +5,16 @@
         <h3 :class="['form_title', { form_title_r: !loginShow }]">
           {{ !loginShow ? 'Registered' : 'Login' }}
         </h3>
-        <label v-if="!loginShow" for="nickName">昵称</label>
+        <label v-if="!loginShow" for="nickName">昵 称</label>
         <input
           v-if="!loginShow"
           id="nickName"
           v-model.trim="userInfo.nickName"
           type="text"
         />
-        <label for="userName">账号</label>
+        <label for="userName">账 号</label>
         <input id="userName" v-model.trim="userInfo.userName" type="text" />
-        <label for="password">密码</label>
+        <label for="password">密 码</label>
         <input id="password" v-model.trim="userInfo.password" type="password" />
         <button v-if="!loginShow" @click.stop="myreg">注册</button>
         <button v-else @click.stop="mylogin">登录</button>
@@ -101,7 +101,7 @@ export default {
 }
 .wrap {
   padding: 1rem;
-  width: 35%;
+  max-width: 455px;
   @media screen and (max-width: 410px) {
     width: 100%;
   }
@@ -110,7 +110,7 @@ export default {
     color: white;
     z-index: 2;
     box-shadow: 6px 8px 11px #00000042;
-    padding: 30px 24px 24px;
+    padding: 45px 24px;
     background: #fff;
     border-radius: 4px;
     background-repeat: no-repeat;
@@ -127,41 +127,38 @@ export default {
     }
     .form_title_r {
       color: #fffdfa;
-      text-shadow: 4px 3px 0px #f27474, -1px -2px #606675;
+      text-shadow: 4px 3px 0px #ffa0b4, -1px -2px #ffa0b4;
     }
     input {
-      // min-width: 20vw;
       margin: 0.4rem 0 1rem;
-      outline-color: #ffbc9c;
+      outline-color: #fc9db4;
       border-radius: 4px;
       border: none;
-      color: #3b3b3b;
+      color: #575e5d;
       letter-spacing: 4px;
       width: 100%;
       padding: 10px;
       transition: 0.3s;
       border: 1px solid #e8e8e8;
-      font-size: 20px;
+      font-size: 0.8rem;
       height: 48px;
-      padding-right: 46px;
+      padding-left: 16px;
     }
     label {
       display: block;
       position: absolute;
-      letter-spacing: 4px;
       color: #b2bac2;
       left: 42px;
-      padding: 0 7px;
+      padding: 0 10px;
       background: #fff;
       font-size: 15px;
     }
     button {
-      margin: 1rem 0;
+      margin: 1rem 0 0;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      // transition: all 1s;
       transition: opacity 0.2s;
       font-family: serif;
       transition: all 0.5s;

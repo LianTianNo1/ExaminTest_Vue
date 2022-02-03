@@ -8,8 +8,8 @@ export default new Vuex.Store({
     isLogin: "",
     userInfo: {},
     nowTestExamin: {},
-    // baseURL: "http://127.0.0.1:3000",
-    baseURL: "",
+    baseURL: "http://127.0.0.1:3000",
+    // baseURL: "",
   },
   mutations: {
     updataStatus(state, params) {
