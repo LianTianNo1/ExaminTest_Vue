@@ -179,7 +179,7 @@ export default {
   justify-items: flex-start;
   position: relative;
   overflow: hidden;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
 }
 .container::after {
   position: absolute;
@@ -194,6 +194,7 @@ export default {
   z-index: -1;
 }
 .left_item_show {
+  position: absolute;
   transform: scale(0) !important;
 }
 .change_show_btn {
@@ -201,7 +202,7 @@ export default {
   text-align: center;
 }
 .left {
-  transition: all 1s;
+  // transition: all 1s;
   width: 20vw;
   transform: scale(1);
   display: flex;

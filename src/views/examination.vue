@@ -726,7 +726,8 @@ export default {
   cursor: pointer;
   font-size: 0.7rem;
   letter-spacing: 1px;
-  font-family: fangsong;
+  color: #804d02;
+  font-family: serif;
   position: relative;
   background: #fafafaa3;
   margin: 20px 0;
@@ -745,8 +746,7 @@ export default {
 .choose_item_active {
   background-image: linear-gradient(135deg, transparent 10%, #f067b4 100%);
   background-color: #81ffef;
-  color: white;
-  text-shadow: 1px 1px 0px #3e4854, 2px 2px 0px #949c9f;
+  color: #606266;
   animation: choose_item_active 1s;
 }
 @keyframes choose_item_active {
