@@ -8,16 +8,9 @@
           (例子：如果是没有多选，建立多选这个表不写入内容，可以为空，在后面建立判断)
         </p>
       </div>
-
-      <!-- <div class="example">
-        <img src="../assets/example.png" alt="" />
-      </div> -->
       <div class="banner">
         <div class="banner_wrap">
           <ul class="banner_list">
-            <!-- <li :key="index" v-for="(item, index) in 4">
-              <img :src="'../assets/example' + (index + 1) + '.png'" alt="" />
-            </li> -->
             <li :class="{ imgActive: 0 === imgIndex }">
               <img src="../assets/example1.png" alt="" />
             </li>
@@ -60,9 +53,9 @@ export default {
       imgIndex: 0,
       textArr: [
         `单选题->建立在第一个表(表必须是第一个，可为空占位)->表头必须包含：题号、题目、A、B、C、D、答案（顺序随意）`,
-        `多选题->建立在第二个表(表必须是第一个，可为空占位)-->表头必须包含：题号、题目、A、B、C、D、答案（顺序随意）`,
-        `判断题->建立在第三个表(表必须是第一个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意）`,
-        `填空题->建立在第四个表(表必须是第一个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意,填空的答案使用中文逗号分隔）`
+        `多选题->建立在第二个表(表必须是第二个，可为空占位)-->表头必须包含：题号、题目、A、B、C、D、答案（顺序随意）`,
+        `判断题->建立在第三个表(表必须是第三个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意）`,
+        `填空题->建立在第四个表(表必须是第四个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意,填空的答案使用中文逗号分隔）`
       ]
     }
   },
@@ -121,32 +114,20 @@ export default {
       letter-spacing: 1px;
       box-shadow: 0px 5px 40px 0px #113a5d1a;
     }
-    .example {
-      padding: 2rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      overflow-y: scroll;
-      height: calc(92vh - 114px);
-      img {
-        width: 60%;
-        box-shadow: 4px 8px 20px #2c2b2b52;
-      }
-    }
+
     .banner {
       padding: 2rem 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow-y: scroll;
       height: calc(92vh - 114px);
       .banner_wrap {
         width: 65%;
-        height: 55%;
+        height: 37%;
         position: relative;
         p.tip {
           position: absolute;
-          top: -46%;
+          top: -70%;
           background: #fb7299;
           line-height: 1.5;
           border-radius: 40px;
@@ -208,6 +189,7 @@ export default {
             background-color: #fff;
             padding: 0.3rem;
             margin: 0.2rem;
+            width: 0rem;
             transition: all 0.4s;
             cursor: pointer;
           }

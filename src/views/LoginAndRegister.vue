@@ -1,5 +1,21 @@
 <template>
   <div class="box">
+    <div class="animation">
+      <!-- <img src="../assets/bg1_0.png" /> -->
+      <div class="cat1"></div>
+      <div class="cat2"></div>
+    </div>
+    <ul class="bubblue">
+      <li style="--i: 7; --k: 2; --j: 2s"></li>
+      <li style="--i: 9; --k: 4; --j: 8s"></li>
+      <li style="--i: 8; --k: 1; --j: 1s"></li>
+      <li style="--i: 3; --k: 5; --j: 4s"></li>
+      <li style="--i: 5; --k: 7; --j: 7s"></li>
+      <li style="--i: 4; --k: 8; --j: 5s"></li>
+      <li style="--i: 10; --k: 6; --j: 6s"></li>
+      <li style="--i: 6; --k: 3; --j: 3s"></li>
+    </ul>
+    <div class="ball"></div>
     <div class="wrap">
       <form>
         <h3 :class="['form_title', { form_title_r: !loginShow }]">
@@ -96,34 +112,198 @@ export default {
   box-shadow: inset 0px 3px 0px 3px black;
   content: '';
   background: url(../assets/bg.png) no-repeat;
+  // background: url(../assets/bg3.png) no-repeat;
+  // background: url(../assets/bg1.png) no-repeat;
   background-size: cover;
   transform: perspective(1px) scale(1.1);
 }
+.ball {
+  position: absolute;
+  top: 0;
+  left: 30%;
+  background-color: #fff;
+  padding: 0.6rem;
+  box-shadow: inset 4px 4px 5px #ffffff8f, 1px 1px 4px #4d4d4d9c,
+    inset -6px -4px 6px #00000014;
+  border-radius: 50%;
+  background-image: linear-gradient(318deg, #bdbdbd, transparent);
+  z-index: 1;
+  transform: translate(0%, -100%);
+  animation: ball_an 3s cubic-bezier(0.18, 0.72, 0.6, 0.72) 1s forwards;
+}
+@keyframes ball_an {
+  30% {
+    top: 30%;
+    left: 0%;
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
+  }
+  29%,
+  59%,
+  94% {
+    filter: blur(1px);
+  }
+  60% {
+    filter: blur(0px);
+    top: 100%;
+    left: 30%;
+    transform: translate(0%, -100%);
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
+  }
+
+  95% {
+    filter: blur(0px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    box-shadow: inset 4px 2px 5px #eeebeb8f, 1px 2px 5px #6665659c;
+  }
+
+  100% {
+    filter: blur(0px);
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+.animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    transform: perspective(1px) scale(1.1);
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  @keyframes cat1_an {
+    to {
+      transform: perspective(1px) scale(1.1);
+    }
+  }
+  .cat1 {
+    filter: drop-shadow(2px 4px 6px #ff631482);
+    transform: perspective(1px) scale(1.1) translate(0, -100%);
+    animation: cat1_an 1s cubic-bezier(1, 0.65, 0, 1.04) 2s forwards;
+    background-image: url(../assets/bg1_1.png);
+  }
+  @keyframes cat2_an {
+    to {
+      top: 0;
+    }
+  }
+  .cat2 {
+    top: 100%;
+    animation: cat2_an 1s cubic-bezier(0.12, 1.4, 1, 1) 3s forwards;
+    background-image: url(../assets/bg1_2.png);
+    filter: drop-shadow(2px 4px 6px #6d6d6d82);
+  }
+}
+ul.bubblue {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly;
+  list-style: none;
+  z-index: 1;
+  li {
+    position: absolute;
+    bottom: 0;
+    left: calc(10% * var(--k));
+    padding: 1rem;
+    transform: scale(calc(var(--i) / 10)) translate(0, 100%);
+    box-shadow: -1px -1px #fff, inset -1px -1px 7px #fff, 2px 2px 6px #574f4f40,
+      inset -10px -8px 20px #ffffff70, inset 4px 2px 9px #ffffff80,
+      inset -6px -7px 20px #00000040;
+    border-radius: 29% 71% 48% 52% / 64% 56% 44% 36%;
+    animation: bubble_move cubic-bezier(0.57, -0.21, 0.24, 0.85) 5s
+      calc(var(--j)) infinite;
+  }
+  @keyframes bubble_move {
+    20% {
+      border-radius: 23% 77% 30% 70% / 75% 32% 68% 25%;
+    }
+
+    50% {
+      border-radius: 37% 63% 55% 45% / 42% 66% 34% 58%;
+    }
+
+    70% {
+      border-radius: 43% 57% 63% 37% / 42% 44% 56% 58%;
+    }
+
+    90% {
+      border-radius: 57% 43% 64% 36% / 33% 60% 40% 67%;
+    }
+    to {
+      bottom: 100%;
+      border-radius: 49% 51% 49% 51% / 73% 71% 29% 27%;
+      transform: scale(calc(var(--i) / 4)) translate(0, 0);
+    }
+  }
+}
+
 .wrap {
-  padding: 1rem;
-  max-width: 455px;
+  transform: scale(0);
+  max-width: 370px;
+  border-radius: 50%;
   @media screen and (max-width: 410px) {
     width: 100%;
   }
+  // max-width: 0px;
+  background: white;
+  animation: wrap_an 1s 4s forwards;
+  z-index: 1;
+  @keyframes wrap_an {
+    to {
+      transform: scale(1);
+      border-radius: 4px;
+    }
+  }
   form {
+    animation: form_an 1s cubic-bezier(1, 0.32, 0, 4.56) 4s forwards;
+    @keyframes form_an {
+      to {
+        padding: 45px 24px;
+        opacity: 1;
+      }
+    }
     position: relative;
     color: white;
+    background: white;
     z-index: 2;
     box-shadow: 6px 8px 11px #00000042;
-    padding: 45px 24px;
-    background: #fff;
+    opacity: 0;
     border-radius: 4px;
     background-repeat: no-repeat;
     .form_title {
       color: #fc9db4;
       text-shadow: 2px 1px 0px #f16083, -1px -1px white;
       margin-bottom: 1rem;
-      top: -22%;
       font-size: 2.5rem;
       text-align: center;
+      top: 0%;
       position: absolute;
       width: calc(100% - 48px);
       transition: all 1s;
+      opacity: 0;
+      animation: form_title_an 1s 5s forwards;
+      @keyframes form_title_an {
+        to {
+          opacity: 1;
+          top: -22%;
+        }
+      }
     }
     .form_title_r {
       color: #fffdfa;

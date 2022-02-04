@@ -718,7 +718,7 @@ export default {
   cursor: pointer;
   position: relative;
   margin: 20px 0;
-  background-color: #2cc0b3;
+  background-color: #2cc0b3a3;
 }
 .choose_item {
   padding: 0.6rem 0.6rem 0.6rem 4rem;
@@ -771,12 +771,26 @@ export default {
 }
 .input_blank {
   padding: 1rem;
-  margin: 1rem 3rem;
+  min-width: 2rem;
+  margin: 1rem;
   box-shadow: 4px 5px 8px 0px #0000001a;
   letter-spacing: 2px;
   outline: none;
+  background: transparent;
   border: none;
+  color: #4d4d4d;
   border-bottom: 1px solid #00bbff;
+  background-image: linear-gradient(1deg, #ffffff, transparent);
+  border-radius: 49% 51% 50% 50% / 90% 55% 45% 10%;
+  animation: border_move 3s linear alternate-reverse infinite;
+}
+@keyframes border_move {
+  50% {
+    border-radius: 32% 68% 26% 74% / 69% 42% 58% 31%;
+  }
+  to {
+    border-radius: 47% 53% 50% 50% / 100% 100% 0% 0%;
+  }
 }
 .echoose > div:nth-child(2)::before {
   content: 'B';
@@ -815,7 +829,6 @@ export default {
   position: absolute;
   display: block;
   z-index: 99999;
-  background: #f5f5f5;
   width: 100vw;
   height: 100vh;
   left: 0;
@@ -830,46 +843,39 @@ export default {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  /* background-color: #96adc8; */
-  border: 10px solid #cbd9dc;
-  box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-    inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-  background-image: linear-gradient(
-    150deg,
-    #56677a,
-    #cedcdf 21%,
-    #6e777a,
-    #566162
-  );
-
+  align-items: flex-start;
+  .choose_item_active {
+    text-shadow: none;
+    font-weight: bold;
+  }
+  .hide_item {
+    font-size: 0.7rem;
+    padding: 0.3rem;
+  }
   .choose_item {
     margin: 5px 0;
-    font-size: 1rem;
+    padding: 0.5rem;
+    font-size: 0.6rem;
+    padding-left: 3.4rem;
+    color: #504e4e;
+    font-family: '';
   }
   .exercises_item {
     @media screen and (max-width: 450px) {
       width: 90%;
     }
-    width: 28%;
+    width: 19%;
     margin-bottom: 2rem;
     box-shadow: 1px 1px 7px #00000033;
     border-radius: 15px;
-    background-color: #f5f5f5;
     overflow: hidden;
-    border: 5px solid #cbd9dc;
-    box-shadow: 6px 8px 7px #00000042, inset 5px 5px 8px 0px #02020285,
-      inset -2px -2px 5px 1px #5c5b5b, 3px 3px 20px #2c2b2b52;
-    background-image: linear-gradient(
-      150deg,
-      #56677a,
-      #cedcdf 21%,
-      #6e777a,
-      #566162
-    );
+    background-color: #dfdfdf6b;
   }
   .exercises_item .etile {
     font-size: 1rem;
+    padding: 0.3rem 0.3rem;
     margin-bottom: 0.5rem;
+    font-size: 0.7rem;
     @media screen and (max-width: 450px) {
       padding: 0.5rem 0.5rem;
     }

@@ -179,6 +179,7 @@ export default {
   justify-items: flex-start;
   position: relative;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 .container::after {
   position: absolute;
@@ -193,10 +194,7 @@ export default {
   z-index: -1;
 }
 .left_item_show {
-  width: 0 !important;
-  min-width: 0px !important;
-  padding: 0 !important;
-  border: none !important;
+  transform: scale(0) !important;
 }
 .change_show_btn {
   cursor: pointer;
@@ -205,21 +203,15 @@ export default {
 .left {
   transition: all 1s;
   width: 20vw;
+  transform: scale(1);
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 320px;
-  /* animation: left_an 3s infinite alternate; */
   background-size: 400% 400%;
   background-position: 0 0;
   color: white;
   background-color: #ffffff24;
-  // background-image: linear-gradient(
-  //   271deg,
-  //   #2b98e6a6 10%,
-  //   transparent 60%,
-  //   #916bc585
-  // );
 }
 @keyframes left_an {
   to {
@@ -242,12 +234,6 @@ export default {
   align-items: flex-start;
   padding-top: 2rem;
   background-color: #ffffff24;
-  // background-image: linear-gradient(
-  //   135deg,
-  //   #2b98e6a6 10%,
-  //   transparent 60%,
-  //   #916bc585
-  // );
 }
 .right_full {
   width: 100% !important;
@@ -373,7 +359,7 @@ export default {
     0 calc(100% - 0px),
     0 20px
   ) !important;
-  box-shadow: inset 3px 0px 5px #0000001f;
+  box-shadow: inset 1px 0px 0px #0000001f;
 }
 .right table {
   border-spacing: 10px 10px;

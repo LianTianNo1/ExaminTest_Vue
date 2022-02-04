@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <div class="headinfo">
       <img class="head_title" src="../assets/logo.png" />
 
@@ -79,20 +79,36 @@ body {
   margin: 0;
   background-color: #9da8b6;
 }
+.box {
+  box-shadow: 0px 5px 40px 0px #113a5d1a;
+}
 .headinfo:hover div.rightgroup {
   display: flex;
 }
 .headinfo {
   padding: 0 2rem;
   margin-bottom: 2vh;
-  box-shadow: 0px 5px 40px 0px #113a5d1a;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 6vh;
   background: #fff;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
-
+.headinfo::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(20px);
+  box-shadow: inset 0px 3px 0px 3px black;
+  content: '';
+  background: url(../assets/bg.png) no-repeat;
+  background-size: cover;
+  transform: perspective(1px) scale(2.1);
+  z-index: -1;
+}
 .head_title {
   height: 100%;
   padding: 9px 15px;
@@ -125,7 +141,8 @@ body {
 }
 .headinfo a {
   float: left;
-  color: #121212;
+  // color: #121212;
+  color: #f5f5f5;
   padding: 0 1rem;
   text-decoration: none;
   font-size: 0.6rem;

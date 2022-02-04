@@ -62,22 +62,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #f5f7fa;
+  color: #606060;
   border-radius: 8px;
   cursor: pointer;
   border-left: 10px solid #50c1e9;
-  border-right: 10px solid #50c1e9;
-  box-shadow: 3px 0px 7px 1px #00000066, inset 2px 2px 2px #0000007a,
-    inset -2px -2px 2px #0000007a;
-  text-shadow: 1px 1px 0px #7d878a, 2px 2px 0px #5d6567, 3px 3px 0px #ffffff,
-    4px 4px 0px #606568;
-  background-image: linear-gradient(45deg, transparent 32%, #087ee9);
-  background-color: #ff5142;
-  transition: all 2s;
+  border-right: 10px solid #e94c6f;
+  background-color: #ffffff91;
+  transition: all 1s;
 }
 .left_btn:hover {
-  background-color: #6c9ff7;
-  background-image: linear-gradient(-45deg, #f65f52, #61aef8, transparent);
+  color: white;
+  background-color: #50c1e9;
+  background-image: linear-gradient(-45deg, #e94c6f, #50c1e9);
 }
 
 .left_item_show {
