@@ -1,7 +1,9 @@
 <template>
   <div class="exmination-box">
     <div class="uploadfile" v-if="chooseFileShow">
-      <div @click="targetChooseFile" class="uploadfile_btn">上传文件</div>
+      <button @click="targetChooseFile" class="uploadfile_btn">
+        <span>上传文件</span>
+      </button>
       <input
         type="file"
         @change="chooseFile($event)"
@@ -14,13 +16,32 @@
       <div class="error_list"></div>
     </div>
     <div v-show="containerShow" class="container">
-      <leftItem
-        :total_data="total_data"
-        :leftShow="leftShow"
-        :leftItemShow="leftItemShow"
-        @parentChooseItem="chooseItem($event)"
-        @parentChangeLeftShow="changeLeftShow($event)"
-      ></leftItem>
+      <!-- 左边题号 -->
+      <div :class="['left', { left_item_show: leftItemShow }]">
+        <div
+          v-for="item in total_data"
+          :key="item.id"
+          v-show="JSON.stringify(item.data) !== '{}' && item.data"
+          class="sign_choose"
+        >
+          <div class="left_title">{{ item.title }}</div>
+          <div class="left_item">
+            <div
+              @click="targetChooseItem(item['titletype'], index2, $event)"
+              :key="item2 + item.data.data[item.data['title_index']]"
+              v-for="(item2, index2) in item.data.data"
+              :mydata="item.answerList[index2]"
+              :class="['serial', { serial_visited: item.answerList[index2] }]"
+            >
+              {{ index2 + 1 }}
+            </div>
+          </div>
+        </div>
+        <div class="left_btn" @click="changeLeftShow">
+          {{ leftItemShow ? '显示' : '隐藏' }}题号
+        </div>
+      </div>
+      <!-- 右边做题区 -->
       <div :class="['right', { right_full: leftItemShow }]">
         <div class="sign_exercises_box">
           <div
@@ -192,12 +213,9 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-const leftItem = () => import('@/components/left.vue')
 export default {
   name: "examination",
-  components: {
-    leftItem
-  },
+
   computed: {
     ...mapState(['baseURL', 'userInfo', 'nowTestExamin'])
   },
@@ -283,9 +301,11 @@ export default {
       this.$emit('reloadComponent')
     },
     // 切换题号
-    changeLeftShow(e) {
-      console.log(e)
-      this.leftItemShow = e
+    changeLeftShow() {
+      this.leftItemShow = !this.leftItemShow
+    },
+    targetChooseItem(titletype, index) {
+      this.chooseItem([titletype, index])
     },
     // 触发文件选择
     targetChooseFile() {
@@ -580,6 +600,9 @@ export default {
   position: relative;
   overflow: hidden;
   height: 92vh;
+  @media screen and (max-width: 420px) {
+    height: 90vh;
+  }
 }
 .exmination-box::after {
   top: 0;
@@ -606,21 +629,91 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 420px) {
+    height: 90vh;
+  }
 }
 
 .uploadfile_btn {
-  padding: 1rem 2rem;
-  color: white;
-  background-color: #fb7299;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 6rem;
+  height: 2rem;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
   cursor: pointer;
-  transition: all 1s;
-  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px #ffffff80, 7px 7px 20px 0px #0000001a,
+    4px 4px 5px 0px #0000001a;
+  outline: none;
+  background: linear-gradient(0deg, #ff9700 0%, #fb4b02 100%);
+  line-height: 2rem;
+  padding: 0;
+  border: none;
+}
+.uploadfile_btn span:before,
+.uploadfile_btn span:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  top: 0;
+  background: rgba(251, 75, 2, 1);
+  box-shadow: -7px -7px 20px 0px #ffffffe6, 1px 1px 4px 0px #ffffffe6,
+    7px 7px 20px 0px #00000033, 4px 4px 5px 0px #0000004d;
+  transition: all 0.3s ease;
+}
+.uploadfile_btn span:hover:after {
+  width: 100%;
+}
+.uploadfile_btn span:after {
+  height: 2px;
+  width: 0%;
+}
+.uploadfile_btn span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.uploadfile_btn span:before {
+  width: 2px;
+  height: 0%;
+}
+.uploadfile_btn span:hover:before {
+  height: 100%;
+}
+.uploadfile_btn:before,
+.uploadfile_btn:after {
+  position: absolute;
+  content: '';
+  right: 0;
+  bottom: 0;
+  background: rgba(251, 75, 2, 1);
+  box-shadow: -7px -7px 20px 0px #ffffffe6, -4px -4px 5px 0px #ffffffe6,
+    7px 7px 20px 0px #00000033, 4px 4px 5px 0px #0000004d;
+  transition: all 0.3s ease;
+}
+.uploadfile_btn:after {
+  width: 0%;
+  height: 2px;
+}
+.uploadfile_btn:before {
+  height: 0%;
+  width: 2px;
 }
 .uploadfile_btn:hover {
-  background-color: #35a7ff;
+  color: rgba(251, 75, 2, 1);
+  background: #e0e5ec;
+}
+.uploadfile_btn:hover:before {
+  height: 100%;
+}
+.uploadfile_btn:hover:after {
+  width: 100%;
 }
 .choose_file {
   width: 0;
@@ -657,6 +750,86 @@ export default {
   display: flex;
   overflow: hidden;
   justify-content: space-between;
+}
+.left {
+  height: 92vh;
+  width: 23%;
+  padding: 1rem;
+  background-color: #f5f7fa;
+  box-shadow: 1px 1px 7px #00000033;
+  overflow-y: auto;
+  padding-bottom: 6rem;
+  min-width: 350px;
+  max-width: 350px;
+  background-color: rgba(255, 255, 255, 0.274);
+  transition: all 1s;
+}
+.left_btn {
+  height: 2rem;
+  font-weight: bold;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #606060;
+  border-radius: 8px;
+  cursor: pointer;
+  border-left: 10px solid #50c1e9;
+  border-right: 10px solid #e94c6f;
+  background-color: #ffffff91;
+  transition: all 1s;
+}
+.left_btn:hover {
+  color: white;
+  background-color: #50c1e9;
+  background-image: linear-gradient(-45deg, #e94c6f, #50c1e9);
+}
+
+.left_item_show {
+  width: 0;
+  min-width: 0px;
+  padding: 0;
+  border: none;
+}
+.left_title {
+  height: 2rem;
+  font-weight: bold;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-left: 10px solid #e2ebee;
+  box-shadow: 3px 0px 7px 1px #fa759b80, inset 1px 0px 1px #000000;
+  text-shadow: 1px 1px 0px #151515, 2px 2px 0px #cbcbcb;
+  background-image: linear-gradient(45deg, #fa8cab, #fb7299);
+}
+.left_item {
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.serial {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.2rem;
+  font-size: 0.5rem;
+  color: #5a697a;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 2px 2px 0px #71717191;
+}
+.serial_visited {
+  box-shadow: 2px 2px 0px #eaeef1;
+  background: #fb7299;
+  color: white;
 }
 .right_full {
   width: 100% !important;

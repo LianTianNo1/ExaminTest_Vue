@@ -32,10 +32,10 @@
         <input id="userName" v-model.trim="userInfo.userName" type="text" />
         <label for="password">密 码</label>
         <input id="password" v-model.trim="userInfo.password" type="password" />
-        <button v-if="!loginShow" @click.stop="myreg">注册</button>
-        <button v-else @click.stop="mylogin">登录</button>
+        <button v-if="!loginShow" @click.stop="myreg"><span>注册</span></button>
+        <button v-else @click.stop="mylogin"><span>登录</span></button>
         <button @click="toggleStatus">
-          切换{{ loginShow ? '注册' : '登录' }}
+          <span> 切换{{ loginShow ? '注册' : '登录' }} </span>
         </button>
       </form>
     </div>
@@ -63,6 +63,8 @@ export default {
   methods: {
     ...mapMutations(['updataStatus', 'updataUserInfo']),
     async myreg() {
+      if (this.userInfo.userName.length < 6) return this.$message.error('用户账号不能少于6位');
+      if (this.userInfo.password.length < 6) return this.$message.error('用户密码不能少于6位');
       if (!this.userInfo.nickName || !this.userInfo.userName || !this.userInfo.password) return this.$message.error('请填写必要信息！');
       const url = this.baseURL + '/demo/examination/reg'
       const res = (await this.$axios.post(url, this.userInfo)).data
@@ -94,76 +96,150 @@ export default {
 .box {
   width: 100%;
   padding: 1rem;
-  height: calc(100vh - 8vh);
-  // height: 86vh;
+  height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   background: #fff;
+  background: #8ac6d1;
   box-shadow: 0px 0px 2px #627c991a;
   overflow: hidden;
+  @media screen and (max-width: 420px) {
+    height: 90vh;
+  }
 }
 .box::after {
   position: absolute;
   width: 100%;
   height: 100%;
   filter: blur(20px);
-  box-shadow: inset 0px 3px 0px 3px black;
   content: '';
-  background: url(../assets/bg.png) no-repeat;
-  // background: url(../assets/bg3.png) no-repeat;
-  // background: url(../assets/bg1.png) no-repeat;
-  background-size: cover;
-  transform: perspective(1px) scale(1.1);
+  animation: box_an 0.1s linear 5.7s forwards;
+}
+@keyframes box_an {
+  to {
+    background: url(../assets/bg.png) no-repeat;
+    background-size: cover;
+    transform: perspective(1px) scale(1.1);
+    box-shadow: inset 0px 3px 0px 3px black;
+  }
 }
 .ball {
   position: absolute;
   top: 0;
   left: 30%;
   background-color: #fff;
-  padding: 0.6rem;
+  padding: 1rem;
   box-shadow: inset 4px 4px 5px #ffffff8f, 1px 1px 4px #4d4d4d9c,
     inset -6px -4px 6px #00000014;
   border-radius: 50%;
   background-image: linear-gradient(318deg, #bdbdbd, transparent);
   z-index: 1;
   transform: translate(0%, -100%);
-  animation: ball_an 3s cubic-bezier(0.18, 0.72, 0.6, 0.72) 1s forwards;
+  // animation: ball_an 25s cubic-bezier(0.18, 0.72, 0.6, 0.72) 1s infinite;
+  animation: ball_an 5s cubic-bezier(0.18, 0.72, 0.6, 0.72) 1s forwards;
 }
 @keyframes ball_an {
-  30% {
+  9%,
+  19%,
+  29%,
+  39%,
+  49%,
+  59%,
+  69%,
+  79%,
+  89% {
+    filter: blur(1px);
+    transform: scale(0.8);
+    border-radius: 50%;
+  }
+  1%,
+  11%,
+  21%,
+  31%,
+  41%,
+  51%,
+  61%,
+  71%,
+  81%,
+  91% {
+    border-radius: 50%;
+  }
+  10% {
     top: 30%;
     left: 0%;
+    border-radius: 19% 81% 77% 23% / 50% 52% 48% 50%;
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
-  29%,
-  59%,
-  94% {
-    filter: blur(1px);
+  20% {
+    filter: blur(0px);
+    top: 100%;
+    left: 30%;
+    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    transform: translate(0%, -100%) scale(1.2);
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
+  }
+
+  30% {
+    top: 60%;
+    left: 100%;
+    border-radius: 78% 22% 21% 79% / 50% 52% 48% 50%;
+    transform: translate(-100%, 0%) scale(1.2);
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
+  }
+  40% {
+    top: 0%;
+    left: 56%;
+    border-radius: 47% 53% 50% 50% / 19% 22% 78% 81%;
+    transform: scale(1.2);
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
+  }
+  50% {
+    top: 40%;
+    left: 0%;
+    border-radius: 19% 81% 77% 23% / 50% 52% 48% 50%;
+    transform: scale(1.2);
+    box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   60% {
     filter: blur(0px);
     top: 100%;
-    left: 30%;
-    transform: translate(0%, -100%);
+    left: 40%;
+    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    transform: translate(0%, -100%) scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
-
-  95% {
+  70% {
+    filter: blur(0px);
+    top: 30%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  80% {
+    filter: blur(0px);
+    top: 100%;
+    left: 50%;
+    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    transform: translate(-50%, -100%) scale(1.2);
+  }
+  90% {
     filter: blur(0px);
     top: 50%;
     left: 50%;
+    border-radius: 50%;
     transform: translate(-50%, -50%);
-    opacity: 1;
     box-shadow: inset 4px 2px 5px #eeebeb8f, 1px 2px 5px #6665659c;
   }
-
+  99% {
+    opacity: 1;
+  }
   100% {
     filter: blur(0px);
-
     top: 50%;
     left: 50%;
+    border-radius: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
   }
@@ -193,7 +269,7 @@ export default {
   .cat1 {
     filter: drop-shadow(2px 4px 6px #ff631482);
     transform: perspective(1px) scale(1.1) translate(0, -100%);
-    animation: cat1_an 1s cubic-bezier(1, 0.65, 0, 1.04) 2s forwards;
+    animation: cat1_an 1s cubic-bezier(1, 0.65, 0, 1.04) 8.7s forwards;
     background-image: url(../assets/bg1_1.png);
   }
   @keyframes cat2_an {
@@ -203,27 +279,37 @@ export default {
   }
   .cat2 {
     top: 100%;
-    animation: cat2_an 1s cubic-bezier(0.12, 1.4, 1, 1) 3s forwards;
+    animation: cat2_an 1s cubic-bezier(0.12, 1.4, 1, 1) 9.7s forwards;
     background-image: url(../assets/bg1_2.png);
     filter: drop-shadow(2px 4px 6px #6d6d6d82);
+  }
+}
+@keyframes bubblue_an {
+  to {
+    opacity: 1;
   }
 }
 ul.bubblue {
   position: absolute;
   display: flex;
   width: 100%;
+  opacity: 0;
   height: 100%;
   justify-content: space-evenly;
   list-style: none;
   z-index: 1;
+  animation: bubblue_an 0.1s 6s forwards;
   li {
     position: absolute;
     bottom: 0;
     left: calc(10% * var(--k));
     padding: 1rem;
     transform: scale(calc(var(--i) / 10)) translate(0, 100%);
-    box-shadow: -1px -1px #fff, inset -1px -1px 7px #fff, 2px 2px 6px #574f4f40,
-      inset -10px -8px 20px #ffffff70, inset 4px 2px 9px #ffffff80,
+    // box-shadow: -1px -1px #fff, inset -1px -1px 7px #fff, 2px 2px 6px #574f4f40,
+    //   inset -10px -8px 20px #ffffff70, inset 4px 2px 9px #ffffff80,
+    //   inset -6px -7px 20px #00000040;
+    box-shadow: -1px -1px #fff, inset -1px -1px 7px #fff, 2px 2px 6px #fb729945,
+      inset -10px -8px 20px #fea4b6a3, inset 4px 2px 9px #ffffff,
       inset -6px -7px 20px #00000040;
     border-radius: 29% 71% 48% 52% / 64% 56% 44% 36%;
     animation: bubble_move cubic-bezier(0.57, -0.21, 0.24, 0.85) 5s
@@ -262,7 +348,7 @@ ul.bubblue {
   }
   // max-width: 0px;
   background: white;
-  animation: wrap_an 1s 4s forwards;
+  animation: wrap_an 1s 5.7s forwards;
   z-index: 1;
   @keyframes wrap_an {
     to {
@@ -271,7 +357,7 @@ ul.bubblue {
     }
   }
   form {
-    animation: form_an 1s cubic-bezier(1, 0.32, 0, 4.56) 4s forwards;
+    animation: form_an 1s cubic-bezier(1, 0.32, 0, 4.56) 6.7s forwards;
     @keyframes form_an {
       to {
         padding: 45px 24px;
@@ -297,7 +383,7 @@ ul.bubblue {
       width: calc(100% - 48px);
       transition: all 1s;
       opacity: 0;
-      animation: form_title_an 1s 5s forwards;
+      animation: form_title_an 1s 7.7s forwards;
       @keyframes form_title_an {
         to {
           opacity: 1;
@@ -334,30 +420,54 @@ ul.bubblue {
       font-size: 15px;
     }
     button {
+      position: relative;
       margin: 1rem 0 0;
-      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.2s;
-      font-family: serif;
-      transition: all 0.5s;
       width: 100%;
       padding: 12px;
       font-size: 14px;
-      font-weight: 400;
-      background: #0066ff;
-      border-radius: 4px;
-      color: white;
-      border: 1px solid #fc9db4;
-      background-color: #fbecd1;
-      background-image: linear-gradient(90deg, transparent, #ff99b1);
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(180deg, #f06d92 0%, #fb7299 100%);
+      color: #fff;
+      border-radius: 5px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: inset 2px 2px 2px 0px #ffffff80, 7px 7px 20px 0px #0000001a,
+        4px 4px 5px 0px #0000001a;
+      outline: none;
+    }
+    button:before,
+    button:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 2px;
+      width: 0;
+      background: #fb7299;
+      box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003,
+        4px 4px 5px 0px #0002;
+      transition: 400ms ease all;
+    }
+    button:after {
+      right: inherit;
+      top: inherit;
+      left: 0;
+      bottom: 0;
+    }
+    button:hover:before,
+    button:hover:after {
+      width: 100%;
+      transition: 800ms ease all;
     }
     button:hover {
-      opacity: 0.9;
-      background-color: #ff99b1;
-      background-image: linear-gradient(90deg, #fbecd1, transparent);
-      border: 1px solid #fbecd1;
+      color: #fb7299;
+      background: transparent;
+      box-shadow: none;
     }
   }
 }

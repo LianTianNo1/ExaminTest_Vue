@@ -12,24 +12,7 @@
       </div>
       <ul v-show="!isSearch" class="shared_result">
         <li v-for="(item, index) in searchResult" :key="item.id">
-          <img
-            class="card_bg"
-            src="https://assets.codepen.io/1462889/sea.png"
-            alt=""
-          />
-          <img
-            class="card_bg1"
-            src="https://assets.codepen.io/1462889/kayak.png"
-            alt=""
-          />
-          <img
-            class="card_bg2"
-            src="https://assets.codepen.io/1462889/water.png"
-            alt=""
-          />
-          <p class="dataName">
-            <em class="dataNameSpan">{{ item.dataName }}</em>
-          </p>
+          <p>{{ item.dataName }}</p>
           <div class="taggroup">
             <span>{{ item.tag ? item.tag : '暂无标签' }}</span>
           </div>
@@ -47,24 +30,7 @@
       </ul>
       <ul v-show="isSearch" class="shared_result">
         <li v-for="(item, index) in userInfo['shareList']" :key="item.id">
-          <img
-            class="card_bg"
-            src="https://assets.codepen.io/1462889/sea.png"
-            alt=""
-          /><img
-            class="card_bg1"
-            src="https://assets.codepen.io/1462889/kayak.png"
-            alt=""
-          />
-          <img
-            class="card_bg2"
-            src="https://assets.codepen.io/1462889/water.png"
-            alt=""
-          />
-          <p class="dataName">
-            <em class="dataNameSpan">{{ item.dataName }}</em>
-          </p>
-
+          <p>{{ item.dataName }}</p>
           <div class="taggroup">
             <span>{{ item.tag ? item.tag : '暂无标签' }}</span>
           </div>
@@ -262,119 +228,51 @@ ul.shared_result {
       min-width: 92%;
     }
     transition: all 0.5s;
-    min-width: 260px;
-    margin-top: 30px;
+    min-width: 280px;
+    margin: 10px;
     color: white;
     box-shadow: 2px 2px 8px #00000021, inset 1px 0px 0px 0px #02020242;
-    padding: 4rem 0.8rem 0.8rem 0.8rem;
+    padding: 0.8rem;
     border-left: 8px solid #fb7299;
-    border-radius: 0 8px 8px 0;
-    background-color: #fff;
-    width: 18%;
+    border-radius: 0 4px 4px 0;
+    background-color: #ffffff82;
+    width: 20%;
+    clip-path: polygon(
+      0px 0,
+      calc(100% - 20px) 0,
+      100% 20px,
+      100% calc(100% - 20px),
+      calc(100% - 20px) 100%,
+      20px 100%,
+      0 calc(100% - 0px),
+      0 20px
+    ) !important;
     transform: scale(0.9);
-    position: relative;
-    img.card_bg {
-      position: absolute;
-      top: 0%;
-      left: 0%;
-      z-index: 0;
-      width: 100%;
-    }
-    img.card_bg1 {
-      width: 93%;
-      position: absolute;
-      top: -11%;
-      left: -15%;
-      z-index: 0;
-    }
-    img.card_bg2 {
-      width: 68%;
-      position: absolute;
-      top: -16%;
-      left: 40%;
-      z-index: 1;
-    }
     p {
+      font-weight: bold;
+      letter-spacing: 1px;
+      font-size: 0.7rem;
+      padding: 0.5rem;
+      font-weight: bold;
+      color: #ffffff;
+      // background-color: #fb7299;
+      background-image: linear-gradient(45deg, #ffa6c0, #fb7299);
+      border-radius: 10px;
       margin-bottom: 0px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 0.9rem;
-      color: #102770;
-      font-family: emoji;
-      font-weight: 900;
-      margin-bottom: 5px;
-    }
-    p.dataName {
-      margin-bottom: 0px;
-      text-align: center;
-      font-size: 0.9rem;
-      font-family: emoji;
-      left: 50%;
-      top: 29%;
-      width: 80%;
-      position: absolute;
-      margin-bottom: 5px;
-      transform: translate(-50%, 0px);
-      z-index: 9;
-      overflow: visible;
-      em {
-        color: #102770;
-        font-weight: 900;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-
-    p.dataName:before {
-      position: absolute;
-      content: '';
-      z-index: -1;
-      background: linear-gradient(217deg, #448ad5, #b8eaf9);
-      width: 70px;
-      height: 70px;
-      display: block;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 6px 20px 0 rgba(16, 39, 112, 0.3);
-      animation: border-transform 6s linear infinite;
-    }
-
-    @keyframes border-transform {
-      0%,
-      100% {
-        border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-      }
-      14% {
-        border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%;
-      }
-      28% {
-        border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;
-      }
-      42% {
-        border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%;
-      }
-      56% {
-        border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%;
-      }
-      70% {
-        border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;
-      }
-      84% {
-        border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
-      }
     }
     strong {
-      color: #9e9e9e;
-      margin-top: 1rem;
-      font-size: 0.55rem;
+      font-size: 0.6rem;
       display: block;
-      line-height: 1rem;
+      padding: 0.4rem;
+      margin: 10px 0;
+      color: #ffffff;
+      // background-color: #fb7299;
+      background-image: linear-gradient(45deg, #ffa6c0, #fb7299);
+      border-radius: 10px;
     }
-
     span {
       position: relative;
       padding: 5px;
@@ -389,8 +287,18 @@ ul.shared_result {
       );
       border-radius: 4px;
       display: block;
-      padding: 0.3rem 0.5rem 0.3rem 0.7rem;
+      padding: 0.4rem 1rem 0.4rem 1rem;
       margin: 0.2rem;
+      clip-path: polygon(
+        0px 0,
+        calc(100% - 20px) 0,
+        100% 20px,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        20px 100%,
+        0 calc(100% - 0px),
+        0 20px
+      ) !important;
     }
     span::after {
       content: '';
@@ -399,8 +307,8 @@ ul.shared_result {
       top: 4px;
       left: 4px;
       border-radius: 50%;
-      padding: 0.2rem;
-      background-color: #ffffff;
+      padding: 0.3rem;
+      background-color: #efedec;
       box-shadow: inset -1px -1px #00000059;
     }
     button {
@@ -427,7 +335,25 @@ ul.shared_result {
         1px 1px 0px 0px #ffffff6b;
       transition: all 0.5s;
     }
-
+    button::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      right: -1px;
+      top: -1px;
+      bottom: -1px;
+      background-image: linear-gradient(
+        90deg,
+        #fb7299,
+        #eb4d4b,
+        #ffeb3b,
+        #03a9f4
+      );
+      background-size: 400%;
+      border-radius: 55px;
+      filter: blur(15px);
+      z-index: -1;
+    }
     .buttongroup button:hover {
       background-image: linear-gradient(
         318deg,
@@ -450,7 +376,7 @@ ul.shared_result {
 .taggroup {
   display: flex;
   justify-content: flex-start;
-  margin: 2rem 0 1rem;
+  margin: 1rem 0;
 }
 
 .buttongroup {

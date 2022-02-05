@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="head_box">
     <div class="headinfo">
       <div class="headinfobg"></div>
       <img class="head_title" src="../assets/logo.png" />
@@ -116,13 +116,12 @@ body {
   margin: 0;
   background-color: #9da8b6;
 }
-.box {
-  box-shadow: 0px 5px 40px 0px #113a5d1a;
-}
+
 .headinfo:hover div.rightgroup {
   display: flex;
 }
 .headinfo {
+  box-shadow: 0px 5px 40px 0px #113a5d1a;
   padding: 0 2rem;
   margin-bottom: 2vh;
   display: flex;
@@ -132,6 +131,9 @@ body {
   background: #fff;
   position: relative;
   z-index: 2;
+  @media screen and (max-width: 420px) {
+    height: 8vh;
+  }
 }
 .headinfobg {
   position: absolute;

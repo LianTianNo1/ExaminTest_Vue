@@ -101,6 +101,9 @@ export default {
   height: 92vh;
   overflow: hidden;
   box-sizing: border-box;
+  @media screen and (max-width: 420px) {
+    height: 90vh;
+  }
   section {
     width: 100vw;
 
@@ -122,12 +125,16 @@ export default {
       align-items: center;
       height: calc(92vh - 114px);
       .banner_wrap {
-        width: 65%;
-        height: 37%;
+        @media screen and (max-width: 420px) {
+          width: 90vw;
+          height: 23vw;
+        }
+        width: 60vw;
+        height: 14vw;
         position: relative;
         p.tip {
+          top: -9rem;
           position: absolute;
-          top: -70%;
           background: #fb7299;
           line-height: 1.5;
           border-radius: 40px;
@@ -178,8 +185,8 @@ export default {
         ul.tab {
           position: absolute;
           list-style: none;
-          top: -21%;
-          right: -3%;
+          top: -3rem;
+          right: -1rem;
           z-index: 3;
           display: flex;
           justify-content: space-evenly;
@@ -223,10 +230,10 @@ export default {
     cursor: pointer;
     background-image: linear-gradient(
       90deg,
-      #03a9f4,
-      #f441a5,
+      #edecea,
+      #fb7299,
       #ffeb3b,
-      #03a9f4
+      #eae9e8
     );
     background-size: 400%;
     border-radius: 55px;
@@ -246,10 +253,10 @@ export default {
     bottom: -1px;
     background-image: linear-gradient(
       90deg,
-      #03a9f4,
-      #f441a5,
+      #edecea,
+      #fb7299,
       #ffeb3b,
-      #03a9f4
+      #eae9e8
     );
     background-size: 400%;
     border-radius: 55px;

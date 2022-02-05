@@ -7,44 +7,23 @@
         ref="image"
         class="choose_file"
       />
-      <div class="card-back">
-        <div class="pricing-wrap">
-          <div class="head_image">
-            <img
-              @click="targetChooseFile"
-              :src="
-                userInfo.head_image === ''
-                  ? 'https://gitee.com/lang-tian/image_upload/raw/master/img/image-20220104174230564.png'
-                  : userInfo.head_image
-              "
-            />
-          </div>
-          <h4 class="mb-5" @click="leftAnimation = !leftAnimation">
-            {{ userInfo.nickname }}
-          </h4>
-          <h2 class="mb-2"><sup>账号</sup>{{ userInfo.username }}</h2>
-          <p class="mb-4">密码</p>
-          <p class="mb-1">
-            <i class="uil uil-location-pin-alt size-22"></i>
-          </p>
-          <p class="mb-4">{{ userInfo.password }}</p>
-          <div
-            @click="leftItemShow = !leftItemShow"
-            class="left_change change_show_btn"
-          >
+      <div class="infobox" v-if="!leftItemShow">
+        <div class="title">用户信息</div>
+        <div class="head_image">
+          <img
+            @click="targetChooseFile"
+            :src="
+              userInfo.head_image === ''
+                ? 'https://gitee.com/lang-tian/image_upload/raw/master/img/image-20220104174230564.png'
+                : userInfo.head_image
+            "
+          />
+        </div>
+        <div class="info">
+          <p class="nickname"><span>昵称：</span>{{ userInfo.nickname }}</p>
+          <p class="password"><span>密码：</span>{{ userInfo.password }}</p>
+          <div @click="leftItemShow = !leftItemShow" class="change_show_btn">
             {{ leftItemShow ? '显示' : '隐藏' }}用户信息
-          </div>
-          <div class="img-wrap img-2">
-            <img src="https://assets.codepen.io/1462889/grass.png" alt="" />
-          </div>
-          <div :class="['img-wrap', 'img-4', { 'img-4active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/camp.png" alt="" />
-          </div>
-          <div :class="['img-wrap', 'img-5', { 'img-5active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/Ivy.png" alt="" />
-          </div>
-          <div :class="['img-wrap', 'img-7', { 'img-7active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/IvyRock.png" alt="" />
           </div>
         </div>
       </div>
@@ -121,8 +100,7 @@ export default {
   },
   data() {
     return {
-      leftItemShow: false,
-      leftAnimation: false
+      leftItemShow: false
     };
   },
   mounted() { },
@@ -195,17 +173,13 @@ export default {
 </script>
 <style  scoped lang="scss">
 .container {
-  height: 92vh;
+  height: calc(100vh - 8vh);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   justify-items: flex-start;
   position: relative;
   overflow: hidden;
-  align-items: center;
-  align-content: center;
-  @media screen and (max-width: 420px) {
-    height: 90vh;
-  }
+  // flex-wrap: wrap;
 }
 .container::after {
   position: absolute;
@@ -220,9 +194,7 @@ export default {
   z-index: -1;
 }
 .left_item_show {
-  // position: absolute;
-  min-width: 0 !important;
-  width: 0 !important;
+  position: absolute;
   transform: scale(0) !important;
 }
 .change_show_btn {
@@ -230,8 +202,8 @@ export default {
   text-align: center;
 }
 .left {
-  transition: all 1s;
-  // width: 25vw;
+  // transition: all 1s;
+  width: 20vw;
   transform: scale(1);
   display: flex;
   justify-content: center;
@@ -240,233 +212,8 @@ export default {
   background-size: 400% 400%;
   background-position: 0 0;
   color: white;
-  // background-color: #ffffff24;
-  @media screen and (max-width: 420px) {
-    width: 100vw;
-    min-width: 100vw;
-    transform: scale(0.85);
-  }
+  background-color: #ffffff24;
 }
-
-.card-back {
-  height: 63%;
-  min-width: 395px;
-  min-height: 612px;
-  height: 612px;
-  background-color: white;
-  border-radius: 6px;
-  transform-style: preserve-3d;
-  box-shadow: 0 12px 35px 0 #10277012, 5px 5px 11px 0 #00000042;
-  @media screen and (max-width: 420px) {
-    min-height: 556px;
-    height: 556px;
-  }
-}
-
-.pricing-wrap {
-  position: relative;
-  padding-top: 160px;
-  width: 100%;
-  height: 100%;
-  display: block;
-  z-index: 1;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.pricing-wrap h4 {
-  position: relative;
-  display: block;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  font-size: 1rem;
-  color: #ffffff;
-  cursor: pointer;
-  transform: translate3d(0, 0, 35px) perspective(100px);
-  box-shadow: 0 6px 20px 0 rgba(16, 39, 112, 0.3);
-  animation: border-transform 6s linear infinite;
-  background: linear-gradient(217deg, #648946, #a3c984);
-  padding: 1rem;
-  margin: 0 auto;
-  width: 7rem;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@keyframes border-transform {
-  0%,
-  100% {
-    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
-  }
-  14% {
-    border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%;
-  }
-  28% {
-    border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%;
-  }
-  42% {
-    border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%;
-  }
-  56% {
-    border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%;
-  }
-  70% {
-    border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%;
-  }
-  84% {
-    border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
-  }
-}
-.left_change {
-  width: 80%;
-  margin: 1rem auto;
-  box-shadow: 1px 1px #00000024, -1px -1px #8f8f8fb5 !important;
-}
-.pricing-wrap h2 {
-  position: relative;
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  letter-spacing: 1px;
-  font-size: 36px;
-  line-height: 1.1;
-  margin-top: 1rem;
-  color: #102770;
-  transform: translate3d(0, 0, 30px) perspective(100px);
-}
-.pricing-wrap h2 sup {
-  font-size: 20px;
-}
-.pricing-wrap p {
-  position: relative;
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.2;
-  letter-spacing: 1px;
-  color: #102770;
-  transform: translate3d(0, 0, 30px) perspective(100px);
-}
-
-.img-wrap img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.img-1 {
-  position: absolute;
-  display: block;
-  left: -160px;
-  top: -50px;
-  z-index: 5;
-  width: calc(80% + 160px);
-  transform: translate3d(0, 0, 45px) perspective(100px);
-  opacity: 1;
-  pointer-events: auto;
-  transition: transform 400ms 1200ms ease, opacity 400ms 1200ms ease;
-}
-.change_show_btn:hover ~ .card-3d-wrap .card-3d-wrapper .img-1 {
-  opacity: 0;
-  transform: translate3d(-50px, 25px, 45px) perspective(100px);
-  pointer-events: none;
-  transition: transform 400ms ease, opacity 200ms 150ms ease;
-}
-.img-2 {
-  position: absolute;
-  display: block;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  overflow: hidden;
-  width: 100%;
-  transform: translate3d(0, 0, 15px) perspective(100px);
-}
-
-.img-4 {
-  position: absolute;
-  display: block;
-  left: -60px;
-  top: -60px;
-  z-index: 5;
-  width: calc(65% + 60px);
-  transform: translate3d(0, 0, 45px) perspective(100px) scale(0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 400ms ease, opacity 200ms 150ms ease;
-}
-.img-4active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate3d(0, 0, 45px) perspective(100px) scale(1);
-  transition: transform 400ms 1200ms ease, opacity 300ms 1200ms ease;
-}
-.img-5 {
-  position: absolute;
-  display: block;
-  right: -70px;
-  top: -50px;
-  z-index: 6;
-  width: calc(60% + 70px);
-  transform: translate3d(0, 0, 35px) perspective(100px) scale(0.5) rotate(0deg);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 400ms 100ms ease, opacity 200ms 250ms ease;
-}
-.img-5active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate3d(0, 0, 35px) perspective(100px) scale(1) rotate(10deg);
-  transition: transform 400ms 1300ms ease, opacity 300ms 1300ms ease;
-}
-.img-7 {
-  position: absolute;
-  display: block;
-  right: -30px;
-  bottom: -65px;
-  z-index: 6;
-  width: calc(25% + 30px);
-  transform: translate3d(0, 0, 35px) perspective(100px) scale(0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 400ms 100ms ease, opacity 200ms 250ms ease;
-}
-.img-7active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate3d(0, 0, 35px) perspective(100px) scale(1);
-  transition: transform 400ms 1300ms ease, opacity 300ms 1300ms ease;
-}
-h4.mb-5 {
-  margin-top: 1rem;
-}
-.logo {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  display: block;
-  z-index: 100;
-  transition: all 250ms linear;
-}
-.logo img {
-  height: 26px;
-  width: auto;
-  display: block;
-}
-
 @keyframes left_an {
   to {
     box-shadow: 3px 0px 20px 1px rgba(0, 0, 0, 14%);
@@ -480,7 +227,7 @@ h4.mb-5 {
 }
 .right {
   transition: all 1s;
-  width: 70vw;
+  width: 75vw;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -488,9 +235,6 @@ h4.mb-5 {
   align-items: flex-start;
   padding-top: 2rem;
   background-color: #ffffff24;
-  @media screen and (max-width: 420px) {
-    width: 0% !important;
-  }
 }
 .right_full {
   width: 100% !important;
@@ -536,10 +280,8 @@ h4.mb-5 {
 }
 .head_image {
   background-color: #becbce;
-  position: relative;
-  top: 4rem;
-  width: 7rem;
-  height: 7rem;
+  position: absolute;
+  /* top: -40%; */
   left: 50%;
   transform: translate(-50%, -68%);
   overflow: hidden;
