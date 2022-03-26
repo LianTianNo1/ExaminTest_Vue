@@ -123,11 +123,12 @@ body {
 .headinfo {
   box-shadow: 0px 5px 40px 0px #113a5d1a;
   padding: 0 2rem;
-  margin-bottom: 2vh;
+  // margin-bottom: 2vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 6vh;
+  // height: 6vh;
+  height: 8vh;
   background: #fff;
   position: relative;
   z-index: 2;
@@ -157,7 +158,7 @@ body {
 //   z-index: -1;
 // }
 .head_title {
-  height: 100%;
+  height: 88%;
   padding: 9px 15px;
 }
 .rightgroupIcon {

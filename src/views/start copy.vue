@@ -24,12 +24,6 @@
               <img src="../assets/example4.png" alt="" />
             </li>
           </ul>
-          <p :class="['title', { textshow: textshow }]">
-            {{ textArr[imgIndex].substring(0, 3) }}
-          </p>
-          <p :class="['tip', 'el-icon-info', { textshow: textshow }]">
-            {{ textArr[imgIndex] }}
-          </p>
           <ul class="tab">
             <li
               :class="{ active: index === imgIndex }"
@@ -40,6 +34,9 @@
               @mouseout="autoTimer"
             ></li>
           </ul>
+          <p class="tip el-icon-info">
+            {{ textArr[imgIndex] }}
+          </p>
         </div>
       </div>
     </section>
@@ -59,9 +56,7 @@ export default {
         `多选题->建立在第二个表(表必须是第二个，可为空占位)-->表头必须包含：题号、题目、A、B、C、D、答案（顺序随意）`,
         `判断题->建立在第三个表(表必须是第三个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意）`,
         `填空题->建立在第四个表(表必须是第四个，可为空占位)-->表头必须包含：题号、题目、答案（顺序随意,填空的答案使用中文逗号分隔）`
-      ],
-      textshow: false,
-      pAnimationControl: null
+      ]
     }
   },
   methods: {
@@ -70,17 +65,11 @@ export default {
     },
     autoMove() {
       if (this.imgIndex >= 3) this.imgIndex = -1
-      this.textshow = true
       this.imgIndex++
-      this.pAnimationControl = setTimeout(() => {
-        this.textshow = false
-      }, 3000);
     },
     clearTimer(index) {
       this.imgIndex = index
-      this.textshow = true
       clearInterval(this.timer)
-      clearTimeout(this.pAnimationControl)
     },
     autoTimer() {
       this.timer = setInterval(this.autoMove, 3500);
@@ -138,48 +127,20 @@ export default {
       .banner_wrap {
         @media screen and (max-width: 420px) {
           width: 90vw;
-          height: 100vw;
+          height: 23vw;
         }
-        width: 53vw;
-        height: 32vw;
-        min-height: 280px;
-        background: #1a1818;
+        width: 60vw;
+        height: 14vw;
         position: relative;
-        box-shadow: 4px 5px 11px #00000029;
-        border-radius: 10px;
-        p.textshow {
-          opacity: 1 !important;
-          transform: translate(-50%, 0px) !important;
-        }
-        p.title {
-          transition: all cubic-bezier(0.79, 0.01, 0.76, 1.47) 0.5s;
-          width: 80%;
-          margin: 0;
-          font-weight: bold;
-          font-size: 24px;
-          color: #ffffff;
-          margin-top: 1rem;
-          // text-align: center;
-          padding: 0.5rem 1rem;
-          position: relative;
-          left: 50%;
-          opacity: 0;
-          transform: translate(-100%, 0px);
-        }
         p.tip {
-          opacity: 0;
-          transform: translate(100%, 0px);
-          transition: all cubic-bezier(0.79, 0.01, 0.76, 1.47) 0.5s;
-          position: relative;
+          top: -9rem;
+          position: absolute;
+          background: #fb7299;
           line-height: 1.5;
-          left: 50%;
-          width: 80%;
-          margin: 0rem auto;
           border-radius: 40px;
           padding: 0.5rem 1rem;
-          color: #889db8;
-          background: none;
-          box-shadow: none;
+          color: white;
+          box-shadow: 1px 1px 1px #38303075;
         }
         ul.banner_list {
           position: relative;
@@ -188,7 +149,7 @@ export default {
           list-style: none;
           clear: both;
           width: 100%;
-          height: 51%;
+          height: 100%;
           li {
             width: 100%;
             position: absolute;
@@ -197,7 +158,7 @@ export default {
             display: none;
             height: 100%;
             transition: all 0.4s;
-            border-radius: 10px 10px 0 0;
+            border-radius: 8px;
             overflow: hidden;
             img {
               height: 100%;
@@ -208,32 +169,31 @@ export default {
             display: block;
           }
         }
-        // ul.banner_list::after {
-        //   content: '';
-        //   display: block;
-        //   position: absolute;
-        //   top: -3rem;
-        //   left: -1rem;
-        //   right: -1rem;
-        //   bottom: -1rem;
-        //   z-index: -1;
-        //   background-color: #ffffff7d;
-        //   border-radius: 10px 10px 5px 5px;
-        //   box-shadow: 11px 9px 10px #0000003d;
-        // }
+        ul.banner_list::after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: -3rem;
+          left: -1rem;
+          right: -1rem;
+          bottom: -1rem;
+          z-index: -1;
+          background-color: #ffffff7d;
+          border-radius: 10px 10px 5px 5px;
+          box-shadow: 11px 9px 10px #0000003d;
+        }
         ul.tab {
           position: absolute;
           list-style: none;
-          bottom: 0;
-          left: calc(50% - 1.2rem);
-          transform: translate(-50%, 0);
+          top: -3rem;
+          right: -1rem;
           z-index: 3;
           display: flex;
           justify-content: space-evenly;
           margin: 1rem;
           li {
             border-radius: 50%;
-            background-color: #fb729975;
+            background-color: #fff;
             padding: 0.3rem;
             margin: 0.2rem;
             width: 0rem;
@@ -292,9 +252,9 @@ export default {
     top: -1px;
     bottom: -1px;
     background-image: linear-gradient(
-      76deg,
+      90deg,
+      #edecea,
       #fb7299,
-      #ec2c62,
       #ffeb3b,
       #eae9e8
     );

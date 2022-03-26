@@ -14,17 +14,16 @@
         <li v-for="(item, index) in searchResult" :key="item.id">
           <img
             class="card_bg"
-            src="https://assets.codepen.io/1462889/sea.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220216.png"
             alt=""
-          />
-          <img
+          /><img
             class="card_bg1"
-            src="https://assets.codepen.io/1462889/kayak.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220205.png"
             alt=""
           />
           <img
             class="card_bg2"
-            src="https://assets.codepen.io/1462889/water.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220114.pdf"
             alt=""
           />
           <p class="dataName">
@@ -49,16 +48,16 @@
         <li v-for="(item, index) in userInfo['shareList']" :key="item.id">
           <img
             class="card_bg"
-            src="https://assets.codepen.io/1462889/sea.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220216.png"
             alt=""
           /><img
             class="card_bg1"
-            src="https://assets.codepen.io/1462889/kayak.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220205.png"
             alt=""
           />
           <img
             class="card_bg2"
-            src="https://assets.codepen.io/1462889/water.png"
+            src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220114.pdf"
             alt=""
           />
           <p class="dataName">
@@ -198,50 +197,84 @@ export default {
   transform: perspective(1px) scale(1.1);
   z-index: -1;
 }
+.inputGroup:before,
+.inputGroup:after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  height: calc(100% + 4px);
+  width: 0;
+  background: #fb7299;
+  // box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003,
+  //   4px 4px 5px 0px #0002;
+  transition: 400ms ease all;
+  background-image: linear-gradient(45deg, #ffffff, #f76a83);
+  z-index: 1;
+  border-radius: 9px;
+}
+.inputGroup:after {
+  right: 0;
+  top: 0px;
+  left: 2px;
+  bottom: 0;
+}
+.inputGroup:hover button {
+  box-shadow: none;
+  transition: 800ms ease all;
+}
+.inputGroup:hover:before,
+.inputGroup:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
 .inputGroup {
+  position: relative;
   margin: 0 auto;
   text-align: center;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
+  width: 65%;
   input {
-    margin-right: 15px;
+    position: relative;
+    z-index: 2;
     min-width: 230px;
     width: 100%;
     background-color: #ffffff;
+    min-height: 50px;
     padding: 0.7rem 1rem;
     outline: none;
     outline-color: transparent;
     border: none;
-    border-radius: 9px;
+    border-radius: 9px 0 0 9px;
     box-shadow: 6px 5px 8px #0000000f, inset 6px 8px 10px #ffffff;
     color: #626c6e;
     letter-spacing: 3px;
-    border-left: 20px solid #eb4d4b;
-    border-right: 20px solid #00a8ff;
   }
   button {
+    position: relative;
+    z-index: 2;
     width: 72px;
-    border-radius: 4px;
+    border-radius: 0 9px 9px 0;
+    min-height: 50px;
     color: white;
     outline: none;
     border: none;
-    box-shadow: 2px 3px 4px #7e7e7e, inset 2px 2px 8px white;
+    box-shadow: 2px 3px 4px #40292930, inset 2px 2px 8px white;
     display: flex;
     background-image: linear-gradient(
       150deg,
       #eb4d4b,
       #f27474 17%,
-      #c6cbc2,
-      #00a8ff
+      #f76884,
+      #f25d6c
     );
     justify-content: center;
     align-items: center;
     cursor: pointer;
     min-width: 5rem;
     padding: 0.7rem 1rem;
-  }
-  @media screen and (max-width: 450px) {
   }
 }
 ul.shared_result {
@@ -255,7 +288,7 @@ ul.shared_result {
   align-items: flex-start;
   li:hover {
     transform: scale(0.9) translate(0, -10px);
-    box-shadow: 6px 16px 17px 0px #4a4a4a9e;
+    box-shadow: 6px 7px 7px 0px #4a4a4a38;
   }
   li {
     @media screen and (max-width: 450px) {
@@ -264,15 +297,24 @@ ul.shared_result {
     transition: all 0.5s;
     min-width: 260px;
     margin-top: 30px;
+    margin: 30px 10px 10px 0px;
     color: white;
     box-shadow: 2px 2px 8px #00000021, inset 1px 0px 0px 0px #02020242;
     padding: 4rem 0.8rem 0.8rem 0.8rem;
-    border-left: 8px solid #fb7299;
+    /* border-left: 8px solid #fb7299; */
     border-radius: 0 8px 8px 0;
     background-color: #fff;
     width: 18%;
     transform: scale(0.9);
     position: relative;
+    background-image: linear-gradient(
+      320deg,
+      #c4c4c4 20%,
+      white 40%,
+      #ffffff 60%,
+      white 80%,
+      transparent
+    );
     img.card_bg {
       position: absolute;
       top: 0%;

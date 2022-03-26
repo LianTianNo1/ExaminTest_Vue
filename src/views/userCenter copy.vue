@@ -306,10 +306,10 @@ export default {
   }
 }
 .head_image img {
-  box-shadow: 1px 1px 9px rgb(29, 27, 27), inset 1px 1px 1px black;
+  box-shadow: 1px 1px 9px #1d1b1b, inset 1px 1px 1px black;
   display: block;
-  width: 2em;
-  height: 2em;
+  width: 100%;
+  transform: scale(1.3);
   cursor: pointer;
 }
 .head_image img:hover {

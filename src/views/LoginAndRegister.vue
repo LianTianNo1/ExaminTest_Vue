@@ -63,8 +63,8 @@ export default {
   methods: {
     ...mapMutations(['updataStatus', 'updataUserInfo']),
     async myreg() {
-      if (this.userInfo.userName.length < 6) return this.$message.error('用户账号不能少于6位');
-      if (this.userInfo.password.length < 6) return this.$message.error('用户密码不能少于6位');
+      if (this.userInfo.userName.length < 6 || this.userInfo.userName.length > 18) return this.$message.error('用户账号必须在6-18位');
+      if (this.userInfo.password.length < 6 || this.userInfo.password.length > 18) return this.$message.error('用户密码必须在6-18位');
       if (!this.userInfo.nickName || !this.userInfo.userName || !this.userInfo.password) return this.$message.error('请填写必要信息！');
       const url = this.baseURL + '/demo/examination/reg'
       const res = (await this.$axios.post(url, this.userInfo)).data
@@ -77,12 +77,13 @@ export default {
       const res = (await this.$axios.post(url, this.userInfo)).data
       if (res.code !== 7) return this.$message.error(res.msg);
       this.$message.success(res.msg);
-      sessionStorage.setItem("isLogin", this.userInfo.userName);
+      sessionStorage.setItem("isLogin", JSON.stringify(this.userInfo.userName));
       const userInfo = (await this.$axios.post(this.baseURL + '/demo/examination/getUserInfo', this.userInfo)).data.data[0]
-      console.log('用户信息为', userInfo)
+      // console.log('用户信息为', userInfo)
       this.updataUserInfo(userInfo)
       sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-      this.updataStatus(JSON.parse(sessionStorage.getItem('isLogin')))
+      // console.log(sessionStorage.getItem('isLogin'))
+      this.updataStatus(JSON.parse(sessionStorage.getItem('isLogin') || ""))
       this.router.push('/start');
     },
 
@@ -105,8 +106,44 @@ export default {
   background: #8ac6d1;
   box-shadow: 0px 0px 2px #627c991a;
   overflow: hidden;
+  animation: box_an2 5s cubic-bezier(0.18, 0.72, 0.6, 0.72) 1s forwards;
+
   @media screen and (max-width: 420px) {
     height: 90vh;
+  }
+}
+@keyframes box_an2 {
+  10% {
+    background: #8ac6d1;
+  }
+  20% {
+    background: #ffb6b9;
+  }
+
+  30% {
+    background: #bbded6;
+  }
+  40% {
+    background: #a696c8;
+  }
+  50% {
+    background: #ff6768;
+  }
+  60% {
+    background: #41b6e6;
+  }
+  70% {
+    background: #ff585d;
+  }
+  80% {
+    background: #d9d9f3;
+  }
+  99% {
+    background: #9dd3a8;
+  }
+
+  100% {
+    background: #9dd3a8;
   }
 }
 .box::after {
@@ -151,7 +188,7 @@ export default {
   79%,
   89% {
     filter: blur(1px);
-    transform: scale(0.8);
+    transform: scale(1);
     border-radius: 50%;
   }
   1%,
@@ -169,14 +206,14 @@ export default {
   10% {
     top: 30%;
     left: 0%;
-    border-radius: 19% 81% 77% 23% / 50% 52% 48% 50%;
+    border-radius: 4% 96% 96% 4% / 49% 52% 48% 51%;
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   20% {
     filter: blur(0px);
     top: 100%;
     left: 30%;
-    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    border-radius: 50% 50% 49% 51% / 88% 92% 8% 12%;
     transform: translate(0%, -100%) scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
@@ -184,57 +221,56 @@ export default {
   30% {
     top: 60%;
     left: 100%;
-    border-radius: 78% 22% 21% 79% / 50% 52% 48% 50%;
+    border-radius: 97% 3% 2% 98% / 49% 52% 48% 51%;
     transform: translate(-100%, 0%) scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   40% {
     top: 0%;
     left: 56%;
-    border-radius: 47% 53% 50% 50% / 19% 22% 78% 81%;
+    border-radius: 50% 50% 49% 51% / 7% 9% 91% 93%;
     transform: scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   50% {
     top: 40%;
     left: 0%;
-    border-radius: 19% 81% 77% 23% / 50% 52% 48% 50%;
+    border-radius: 4% 96% 96% 4% / 49% 52% 48% 51%;
     transform: scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   60% {
     filter: blur(0px);
     top: 100%;
-    left: 40%;
-    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    left: 60%;
+    border-radius: 50% 50% 49% 51% / 88% 92% 8% 12%;
     transform: translate(0%, -100%) scale(1.2);
     box-shadow: inset 3px 4px 5px #ebe8e88f, 2px 1px 4px #6d6c6c9c;
   }
   70% {
     filter: blur(0px);
-    top: 30%;
+    top: 0%;
     left: 50%;
-    border-radius: 50%;
+    border-radius: 50% 50% 49% 51% / 7% 9% 91% 93%;
     transform: translate(-50%, -50%) scale(1.2);
   }
   80% {
     filter: blur(0px);
     top: 100%;
-    left: 50%;
-    border-radius: 47% 53% 50% 50% / 82% 84% 16% 18%;
+    left: 40%;
+    border-radius: 50% 50% 49% 51% / 88% 92% 8% 12%;
     transform: translate(-50%, -100%) scale(1.2);
   }
-  90% {
+  99% {
     filter: blur(0px);
     top: 50%;
     left: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: inset 4px 2px 5px #eeebeb8f, 1px 2px 5px #6665659c;
-  }
-  99% {
     opacity: 1;
   }
+
   100% {
     filter: blur(0px);
     top: 50%;

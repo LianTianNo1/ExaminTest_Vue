@@ -35,16 +35,28 @@
             {{ leftItemShow ? '显示' : '隐藏' }}用户信息
           </div>
           <div class="img-wrap img-2">
-            <img src="https://assets.codepen.io/1462889/grass.png" alt="" />
+            <img
+              src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220404.png"
+              alt=""
+            />
           </div>
           <div :class="['img-wrap', 'img-4', { 'img-4active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/camp.png" alt="" />
+            <img
+              src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220445.png"
+              alt=""
+            />
           </div>
           <div :class="['img-wrap', 'img-5', { 'img-5active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/Ivy.png" alt="" />
+            <img
+              src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220526.png"
+              alt=""
+            />
           </div>
           <div :class="['img-wrap', 'img-7', { 'img-7active': leftAnimation }]">
-            <img src="https://assets.codepen.io/1462889/IvyRock.png" alt="" />
+            <img
+              src="https://gitee.com/lang-tian/image_upload/raw/master/img/20220310220609.png"
+              alt=""
+            />
           </div>
         </div>
       </div>
